@@ -1,1 +1,7 @@
 /logging.out
+/.gradle
+/.settings
+/bin
+/build
+/vpproject
+/gradle
