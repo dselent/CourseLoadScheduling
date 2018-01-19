@@ -1,13 +1,12 @@
 package org.dselent.scheduling.server.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.dselent.scheduling.requests.Register;
 import org.dselent.scheduling.server.dto.RegisterUserDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
+import org.dselent.scheduling.server.requests.Register;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Controller for handling requests related to the user such as logging in or registering.
@@ -38,16 +35,17 @@ public class UsersController
 	 * 
 	 * @param request The body of the request expected to contain a map of String key-value pairs
 	 * @return A ResponseEntity for the response object(s) and the status code
+	 * @throws Exception 
 	 */
     @RequestMapping(method=RequestMethod.POST, value=Register.REQUEST_NAME)
-	public ResponseEntity<String> register(@RequestBody Map<String, String> request) 
+	public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception 
     {
     	// Print is for testing purposes
 		System.out.println("controller reached");
     	
+		// add any objects that need to be returned to the success list
 		String response = "";
 		List<Object> success = new ArrayList<Object>();
-		List<Object> error = new ArrayList<Object>();
 		
 		String userName = request.get(Register.getBodyName(Register.BodyKey.USER_NAME));
 		String firstName = request.get(Register.getBodyName(Register.BodyKey.FIRST_NAME));
@@ -63,26 +61,9 @@ public class UsersController
 		.withPassword(password)
 		.build();
 		
-		try
-		{
-			userService.registerUser(registerUserDto);
-		}
-		catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		userService.registerUser(registerUserDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
-		try
-		{
-			response = JsonResponseCreator.getJSONResponse(success, error);
-		}
-		catch (JsonProcessingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
 		return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 }
