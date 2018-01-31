@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class User extends Model
 {
-	// table name
+	// Table Name
 	public static final String TABLE_NAME = "users";
 		
-	// column names
+	// Column Names
 	public static enum Columns
 	{
 		ID,
@@ -24,15 +24,14 @@ public class User extends Model
 		EMAIL,
 		ENCRYPTED_PASSWORD,
 		SALT,
-		USER_STATE_ID,
 		CREATED_AT,
 		UPDATED_AT
 	}
 	
-	// enum list
+	// Make a List of the Columns
 	private static final List<Columns> COLUMN_LIST = new ArrayList<>();
 	
-	// type mapping
+	// Type Mapping
 	private static final Map<Columns, JDBCType> COLUMN_TYPE_MAP = new HashMap<>();
 	
 	static
@@ -48,13 +47,11 @@ public class User extends Model
 		COLUMN_TYPE_MAP.put(Columns.LAST_NAME, JDBCType.VARCHAR);
 		COLUMN_TYPE_MAP.put(Columns.ENCRYPTED_PASSWORD, JDBCType.VARCHAR);
 		COLUMN_TYPE_MAP.put(Columns.SALT, JDBCType.VARCHAR);
-		COLUMN_TYPE_MAP.put(Columns.USER_STATE_ID, JDBCType.INTEGER);
 		COLUMN_TYPE_MAP.put(Columns.CREATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
 		COLUMN_TYPE_MAP.put(Columns.UPDATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
 	};
 	
-	// attributes
-	
+	// Attributes
 	private Integer id;
 	private String userName;
 	private String firstName;
@@ -62,11 +59,10 @@ public class User extends Model
 	private String email;
 	private String encryptedPassword;
 	private String salt;
-	private Integer userStateId;
 	private Instant createdAt;
 	private Instant updatedAt;
 
-	// methods
+	// Column Methods
 		
 	public static JDBCType getColumnType(Columns column)
 	{
@@ -132,7 +128,6 @@ public class User extends Model
 		this.lastName = lastName;
 	}
 
-
 	public String getEmail()
 	{
 		return email;
@@ -161,16 +156,6 @@ public class User extends Model
 	public void setSalt(String salt)
 	{
 		this.salt = salt;
-	}
-
-	public Integer getUserStateId()
-	{
-		return userStateId;
-	}
-
-	public void setUserStateId(Integer userStateId)
-	{
-		this.userStateId = userStateId;
 	}
 
 	public Instant getCreatedAt()
@@ -223,7 +208,6 @@ public class User extends Model
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result + ((userStateId == null) ? 0 : userStateId.hashCode());
 		return result;
 	}
 
@@ -342,17 +326,7 @@ public class User extends Model
 		{
 			return false;
 		}
-		if (userStateId == null)
-		{
-			if (other.userStateId != null)
-			{
-				return false;
-			}
-		}
-		else if (!userStateId.equals(other.userStateId))
-		{
-			return false;
-		}
+
 		return true;
 	}
 	
@@ -375,8 +349,6 @@ public class User extends Model
 		builder.append(encryptedPassword);
 		builder.append(", salt=");
 		builder.append(salt);
-		builder.append(", userStateId=");
-		builder.append(userStateId);
 		builder.append(", createdAt=");
 		builder.append(createdAt);
 		builder.append(", updatedAt=");
