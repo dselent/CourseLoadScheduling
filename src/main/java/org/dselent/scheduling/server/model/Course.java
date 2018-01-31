@@ -33,16 +33,16 @@ public class Course extends Model{
 
     static
     {
-        for(Course.Columns key : Course.Columns.values())
+        for(Columns key : Columns.values())
         {
             COLUMN_LIST.add(key);
         }
 
-        COLUMN_TYPE_MAP.put(Course.Columns.ID, JDBCType.INTEGER);
-        COLUMN_TYPE_MAP.put(Course.Columns.COURSE_NAME, JDBCType.VARCHAR);
-        COLUMN_TYPE_MAP.put(Course.Columns.COURSE_DESCRIPTION, JDBCType.VARCHAR);
-        COLUMN_TYPE_MAP.put(Course.Columns.CREATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
-        COLUMN_TYPE_MAP.put(Course.Columns.UPDATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
+        COLUMN_TYPE_MAP.put(Columns.ID, JDBCType.INTEGER);
+        COLUMN_TYPE_MAP.put(Columns.COURSE_NAME, JDBCType.VARCHAR);
+        COLUMN_TYPE_MAP.put(Columns.COURSE_DESCRIPTION, JDBCType.VARCHAR);
+        COLUMN_TYPE_MAP.put(Columns.CREATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
+        COLUMN_TYPE_MAP.put(Columns.UPDATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
     };
 
     // Attributes
