@@ -7,4 +7,5 @@
 /gradle
 /.idea
 /out
-/.iml
+/src/main/*.iml
+/src/test/*.iml
