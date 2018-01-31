@@ -1,7 +1,5 @@
 package org.dselent.scheduling.server.model;
 
-
-import javax.print.DocFlavor;
 import java.sql.JDBCType;
 import java.sql.Timestamp;
 import java.time.Instant;
