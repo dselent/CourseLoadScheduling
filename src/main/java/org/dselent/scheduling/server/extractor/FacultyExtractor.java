@@ -28,11 +28,11 @@ public class FacultyExtractor extends Extractor<List<Faculty>>
                 result.setId(null);
             }
 
-            result.setUsersID(rs.getInt(Faculty.getColumnName(Faculty.Columns.USERS_ID)));
+            result.setUsersId(rs.getInt(Faculty.getColumnName(Faculty.Columns.USERS_ID)));
 
             if(rs.wasNull())
             {
-                result.setUsersID(null);
+                result.setUsersId(null);
             }
 
             result.setRequiredCredits(rs.getInt(Faculty.getColumnName(Faculty.Columns.REQUIRED_CREDITS)));
