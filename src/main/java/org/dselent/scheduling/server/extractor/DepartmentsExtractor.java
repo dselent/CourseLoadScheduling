@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentExtractor extends Extractor<List<Department>> {
+public class DepartmentsExtractor extends Extractor<List<Department>> {
     @Override
     public List<Department> extractData(ResultSet rs) throws SQLException {
         List<Department> resultList = new ArrayList<>();
