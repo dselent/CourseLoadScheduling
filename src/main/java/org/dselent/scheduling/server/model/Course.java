@@ -4,10 +4,7 @@ package org.dselent.scheduling.server.model;
 import java.sql.JDBCType;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Course extends Model{
@@ -144,126 +141,33 @@ public class Course extends Model{
         }
     }
 
-    // Remaining Methods
-
+    // Override Methods
     @Override
-    public int hashCode() // Overrides hashCode to be specific to this Model
-    {
-        // Essentially creates a custom hashcode for the entire object based on each element
-
-        final int prime = 31; //Should this be unique to each object?
-        int result = 1;
-
-        // Not sure if the order of these should be obfuscated
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((courseName == null) ? 0 : courseName.hashCode());
-        result = prime * result + ((courseDescription == null) ? 0 : courseDescription.hashCode());
-        result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-        result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
-
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(id, course.id) &&
+                Objects.equals(courseName, course.courseName) &&
+                Objects.equals(courseDescription, course.courseDescription) &&
+                Objects.equals(createdAt, course.createdAt) &&
+                Objects.equals(updatedAt, course.updatedAt);
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj) // If this object is identically itself
-        {
-            return true;
-        }
+    public int hashCode() {
 
-        if (obj == null) // If the comparison object doesn't exist
-        {
-            return false;
-        }
-
-        if (!(obj instanceof Course)) // If the comparison object isn't a Course
-        {
-            return false;
-        }
-
-        Course other = (Course) obj; // Type cast the comparison object to Course for some reason?
-
-        // The comparison order here is dependent on what is most likely to cause a FALSE
-        if (id == null)
-        {
-            if (other.id != null)
-            {
-                return false;
-            }
-        }
-        else if (!id.equals(other.id))
-        {
-            return false;
-        }
-
-        if (createdAt == null)
-        {
-            if (other.createdAt != null)
-            {
-                return false;
-            }
-        }
-        else if (!createdAt.equals(other.createdAt))
-        {
-            return false;
-        }
-
-        if (updatedAt == null)
-        {
-            if (other.updatedAt != null)
-            {
-                return false;
-            }
-        }
-        else if (!updatedAt.equals(other.updatedAt))
-        {
-            return false;
-        }
-
-        if (courseName == null)
-        {
-            if (other.courseName != null)
-            {
-                return false;
-            }
-        }
-        else if (!courseName.equals(other.courseName))
-        {
-            return false;
-        }
-
-        if (courseDescription == null)
-        {
-            if (other.courseDescription != null)
-            {
-                return false;
-            }
-        }
-        else if (!courseDescription.equals(other.courseDescription))
-        {
-            return false;
-        }
-
-        return true;
+        return Objects.hash(id, courseName, courseDescription, createdAt, updatedAt);
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Users [id=");
-        builder.append(id);
-        builder.append(", courseName=");
-        builder.append(courseName);
-        builder.append(", courseDescription=");
-        builder.append(courseDescription);
-        builder.append(", createdAt=");
-        builder.append(createdAt);
-        builder.append(", updatedAt=");
-        builder.append(updatedAt);
-        builder.append("]");
-        return builder.toString();
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", courseDescription='" + courseDescription + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
-
 }

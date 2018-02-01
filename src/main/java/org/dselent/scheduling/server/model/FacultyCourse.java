@@ -1,11 +1,9 @@
 package org.dselent.scheduling.server.model;
 
 import java.sql.JDBCType;
+import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Nathan on 1/31/2018.
@@ -100,20 +98,40 @@ public class FacultyCourse extends Model {
         this.courseSectionID = courseSectionID;
     }
 
-    public Instant getCreatedAt() {
+    public Instant getCreatedAt()
+    {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Instant createdAt)
+    {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public void setCreatedAt(Timestamp createdAt)
+    {
+        if(createdAt != null)
+        {
+            this.createdAt = createdAt.toInstant();
+        }
+    }
+
+    public Instant getUpdatedAt()
+    {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(Instant updatedAt)
+    {
         this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt)
+    {
+        if(updatedAt != null)
+        {
+            this.updatedAt = updatedAt.toInstant();
+        }
     }
 
     @Override

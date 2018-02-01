@@ -3,10 +3,7 @@ package org.dselent.scheduling.server.model;
 import java.sql.JDBCType;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -104,20 +101,14 @@ public class Faculty extends Model {
         this.requiredCredits = requiredCredits;
     }
 
-    public Instant getCreatedAt() {
+    public Instant getCreatedAt()
+    {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Instant createdAt)
+    {
         this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public void setCreatedAt(Timestamp createdAt)
@@ -126,6 +117,16 @@ public class Faculty extends Model {
         {
             this.createdAt = createdAt.toInstant();
         }
+    }
+
+    public Instant getUpdatedAt()
+    {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt)
+    {
+        this.updatedAt = updatedAt;
     }
 
     public void setUpdatedAt(Timestamp updatedAt)

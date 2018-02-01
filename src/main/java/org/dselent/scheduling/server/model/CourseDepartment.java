@@ -8,7 +8,7 @@ import java.util.*;
 
 public class CourseDepartment extends Model {
     // Table Name
-    public static final String TABLE_NAME = "Course Departments";
+    public static final String TABLE_NAME = "course_departments";
 
     // Column Names
     public static enum Columns {

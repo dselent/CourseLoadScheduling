@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class FacultyDepartment extends Model {
     // table name
-    public static final String TABLE_NAME = "facultyDepartment";
+    public static final String TABLE_NAME = "faculty_departments";
 
     // column names
     public static enum Columns {
@@ -96,20 +96,40 @@ public class FacultyDepartment extends Model {
         this.departmentsID = departmentsID;
     }
 
-    public Instant getCreatedAt() {
+    public Instant getCreatedAt()
+    {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Instant createdAt)
+    {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public void setCreatedAt(Timestamp createdAt)
+    {
+        if(createdAt != null)
+        {
+            this.createdAt = createdAt.toInstant();
+        }
+    }
+
+    public Instant getUpdatedAt()
+    {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(Instant updatedAt)
+    {
         this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt)
+    {
+        if(updatedAt != null)
+        {
+            this.updatedAt = updatedAt.toInstant();
+        }
     }
 
     @Override
