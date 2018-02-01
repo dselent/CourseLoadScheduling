@@ -9,3 +9,4 @@
 /out
 /src/main/*.iml
 /src/test/*.iml
+*.iml
