@@ -1,6 +1,5 @@
 package org.dselent.scheduling.server.extractor;
 
-import org.dselent.scheduling.server.model.CourseRequest;
 import org.dselent.scheduling.server.model.CourseTime;
 
 import java.sql.ResultSet;
@@ -29,8 +28,8 @@ public class CourseTimeExtractor extends Extractor<List<CourseTime>> {
                 result.setCourseSectionsId(null);
             }
 
-            result.setCreatedAt(rs.getTimestamp(CourseRequest.getColumnName(CourseRequest.Columns.CREATED_AT)));
-            result.setUpdatedAt(rs.getTimestamp(CourseRequest.getColumnName(CourseRequest.Columns.UPDATED_AT)));
+            result.setCreatedAt(rs.getTimestamp(CourseTime.getColumnName(CourseTime.Columns.CREATED_AT)));
+            result.setUpdatedAt(rs.getTimestamp(CourseTime.getColumnName(CourseTime.Columns.UPDATED_AT)));
 
 
             result.setDayOfWeek(rs.getInt(CourseTime.getColumnName(CourseTime.Columns.DAY_OF_WEEK)));
