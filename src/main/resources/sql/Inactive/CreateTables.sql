@@ -9,7 +9,7 @@ CREATE TABLE users(
 
 );
 
-CREATE TABLE user_permissions(
+CREATE TABLE users_permissions(
 	id serial PRIMARY KEY,
 	users_id integer NOT NULL REFERENCES users(id),
 	role varchar (255) NOT NULL,
