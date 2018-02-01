@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.dselent.scheduling.server.model.Location;
 
-public class Locations extends Extractor<List<Location>> {
+public class LocationsExtractor extends Extractor<List<Location>> {
 
     @Override
     public List<Location> extractData(ResultSet rs) throws SQLException{
