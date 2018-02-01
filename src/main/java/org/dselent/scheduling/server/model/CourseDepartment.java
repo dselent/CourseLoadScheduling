@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.*;
 
 
-public class CourseDepartments extends Model {
+public class CourseDepartment extends Model {
     // Table Name
     public static final String TABLE_NAME = "Course Departments";
 
@@ -69,6 +69,8 @@ public class CourseDepartments extends Model {
         return columnNameList;
     }
 
+    // Setters and Getters
+
     public Integer getId() {
         return id;
     }
@@ -101,27 +103,47 @@ public class CourseDepartments extends Model {
         this.courseNumber = courseNumber;
     }
 
-    public Instant getCreatedAt() {
+    public Instant getCreatedAt()
+    {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Instant createdAt)
+    {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public void setCreatedAt(Timestamp createdAt)
+    {
+        if(createdAt != null)
+        {
+            this.createdAt = createdAt.toInstant();
+        }
+    }
+
+    public Instant getUpdatedAt()
+    {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(Instant updatedAt)
+    {
         this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt)
+    {
+        if(updatedAt != null)
+        {
+            this.updatedAt = updatedAt.toInstant();
+        }
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CourseDepartments that = (CourseDepartments) o;
+        CourseDepartment that = (CourseDepartment) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(courseId, that.courseId) &&
                 Objects.equals(departmentId, that.departmentId) &&
@@ -138,7 +160,7 @@ public class CourseDepartments extends Model {
 
     @Override
     public String toString() {
-        return "CourseDepartments{" +
+        return "CourseDepartment{" +
                 "id=" + id +
                 ", courseId=" + courseId +
                 ", departmentId=" + departmentId +
