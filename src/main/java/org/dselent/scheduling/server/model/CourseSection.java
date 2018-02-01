@@ -32,7 +32,7 @@ public class CourseSection extends Model{
         }
 
         COLUMN_TYPE_MAP.put(Columns.ID, JDBCType.INTEGER);
-        COLUMN_TYPE_MAP.put(Columns.COURSES_ID, JDBCType.VARCHAR);
+        COLUMN_TYPE_MAP.put(Columns.COURSES_ID, JDBCType.INTEGER);
         COLUMN_TYPE_MAP.put(Columns.SECTION_TYPE, JDBCType.VARCHAR);
         COLUMN_TYPE_MAP.put(Columns.CREATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
         COLUMN_TYPE_MAP.put(Columns.UPDATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
@@ -40,7 +40,7 @@ public class CourseSection extends Model{
 
     // Attributes
     private Integer id;
-    private String coursesId;
+    private Integer coursesId;
     private String sectionType;
     private Instant createdAt;
     private Instant updatedAt;
@@ -77,11 +77,11 @@ public class CourseSection extends Model{
         this.id = id;
     }
 
-    public String getCoursesId() {
+    public Integer getCoursesId() {
         return coursesId;
     }
 
-    public void setCoursesId(String coursesId) {
+    public void setCoursesId(Integer coursesId) {
         this.coursesId = coursesId;
     }
 

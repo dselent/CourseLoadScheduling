@@ -30,7 +30,7 @@ public class UsersRolesLinksExtractor extends Extractor<List<UsersRolesLink>>
 			
 			if(rs.wasNull())
 			{
-				result.setId(null);
+				result.setUserId(null);
 			}
 			
 			result.setRoleId(rs.getInt(UsersRolesLink.getColumnName(UsersRolesLink.Columns.ROLE_ID)));
