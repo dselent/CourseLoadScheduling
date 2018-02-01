@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Nathan on 2/1/2018.
  */
-public class UserPermissionsExtractor extends Extractor<List<UserPermission>>
+public class UsersPermissionsExtractor extends Extractor<List<UserPermission>>
 {
     @Override
     public List<UserPermission> extractData(ResultSet rs) throws SQLException
