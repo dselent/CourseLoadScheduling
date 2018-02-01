@@ -46,7 +46,7 @@ public class Faculty extends Model {
     // attributes
 
     private Integer id;
-    private Integer usersID;
+    private Integer usersId;
     private Integer requiredCredits;
     private Instant createdAt;
     private Instant updatedAt;
@@ -85,12 +85,12 @@ public class Faculty extends Model {
         this.id = id;
     }
 
-    public Integer getUsersID() {
-        return usersID;
+    public Integer getUsersId() {
+        return usersId;
     }
 
-    public void setUsersID(Integer usersID) {
-        this.usersID = usersID;
+    public void setUsersId(Integer usersId) {
+        this.usersId = usersId;
     }
 
     public Integer getRequiredCredits() {
@@ -145,7 +145,7 @@ public class Faculty extends Model {
         Faculty faculty = (Faculty) o;
 
         if (id != null ? !id.equals(faculty.id) : faculty.id != null) return false;
-        if (usersID != null ? !usersID.equals(faculty.usersID) : faculty.usersID != null) return false;
+        if (usersId != null ? !usersId.equals(faculty.usersId) : faculty.usersId != null) return false;
         if (requiredCredits != null ? !requiredCredits.equals(faculty.requiredCredits) : faculty.requiredCredits != null)
             return false;
         if (createdAt != null ? !createdAt.equals(faculty.createdAt) : faculty.createdAt != null) return false;
@@ -155,7 +155,7 @@ public class Faculty extends Model {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (usersID != null ? usersID.hashCode() : 0);
+        result = 31 * result + (usersId != null ? usersId.hashCode() : 0);
         result = 31 * result + (requiredCredits != null ? requiredCredits.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
@@ -166,7 +166,7 @@ public class Faculty extends Model {
     public String toString() {
         return "Faculty{" +
                 "id=" + id +
-                ", usersID=" + usersID +
+                ", usersId=" + usersId +
                 ", requiredCredits=" + requiredCredits +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
