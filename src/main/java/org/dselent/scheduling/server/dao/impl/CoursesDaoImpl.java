@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.dselent.scheduling.server.dao.CourseDao;
+import org.dselent.scheduling.server.dao.CoursesDao;
 import org.dselent.scheduling.server.extractor.UsersExtractor;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public abstract class CourseDaoImpl extends BaseDaoImpl<Course> implements CourseDao {
+public abstract class CoursesDaoImpl extends BaseDaoImpl<Course> implements CoursesDao {
     private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Course courseModel) {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
