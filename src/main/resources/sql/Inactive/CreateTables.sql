@@ -11,10 +11,8 @@ CREATE TABLE users(
 
 CREATE TABLE user_permissions(
 	id serial PRIMARY KEY,
-	users_id integer UNIQUE NOT NULL REFERENCES users(id)
-	is_admin boolean NOT NULL DEFAULT(false),
-	is_coursebuilder boolean NOT NULL DEFAULT(false),
-	is_faculty boolean NOT NULL DEFAULT(false),
+	users_id integer NOT NULL REFERENCES users(id),
+	role varchar (255) NOT NULL,
 	created_at timestamp with time zone NOT NULL DEFAULT(CURRENT_TIMESTAMP),
 	updated_at timestamp with time zone NOT NULL DEFAULT(CURRENT_TIMESTAMP)
 );
