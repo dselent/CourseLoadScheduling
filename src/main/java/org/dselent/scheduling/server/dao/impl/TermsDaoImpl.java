@@ -28,6 +28,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
 {
+
+    @Override
+    protected String getTableName(){ return Term.TABLE_NAME; }
+
+    @Override
+    protected String getIdColumnName(){ return Term.getColumnName(Term.Columns.ID); }
+
+    @Override
+    protected List<String> getColumnNameList(){ return Term.getColumnNameList(); }
+
     @Override
     public List<Term> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
     {
@@ -49,70 +59,6 @@ public class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
     }
 
     @Override
-    public Term findById(int id) throws SQLException
-    {
-        String columnName = QueryStringBuilder.convertColumnName(Term.getColumnName(Term.Columns.ID), false);
-        List<String> selectColumnNames = Term.getColumnNameList();
-
-        List<QueryTerm> queryTermList = new ArrayList<>();
-        QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-        queryTermList.add(idTerm);
-
-        List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-        Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
-        orderByList.add(order);
-
-        List<Term> termsList = select(selectColumnNames, queryTermList, orderByList);
-
-        Term term = null;
-
-        if(!termsList.isEmpty())
-        {
-            term = termsList.get(0);
-        }
-
-        return term;
-    }
-
-    @Override
-    public int update(String columnName, Object newValue, List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateUpdateString(Term.TABLE_NAME, columnName, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-        objectList.add(newValue);
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    @Override
-    public int delete(List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateDeleteString(Term.TABLE_NAME, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
     protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Term termModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
@@ -146,6 +92,7 @@ public class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
         }
     }
 
+    @Override
     protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Term termModel)
     {
         if(keyHolderColumnName.equals(Term.getColumnName(Term.Columns.ID)))
@@ -172,18 +119,4 @@ public class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
         }
     }
 
-    @Override
-    public void validateColumnNames(List<String> columnNameList)
-    {
-        List<String> actualColumnNames = Term.getColumnNameList();
-        boolean valid = actualColumnNames.containsAll(columnNameList);
-
-        if(!valid)
-        {
-            List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-            invalidColumnNames.removeAll(actualColumnNames);
-
-            throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-        }
-    }
 }

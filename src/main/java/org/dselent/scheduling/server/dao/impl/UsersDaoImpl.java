@@ -12,7 +12,6 @@ import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.User;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
-import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
@@ -57,6 +56,7 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 	    return usersList;
 	}
 
+	@Override
 	protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, User userModel)
 	{
 		String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
@@ -109,6 +109,7 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
     	}
 	}	
 
+	@Override
 	protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, User userModel)
 	{
     	if(keyHolderColumnName.equals(User.getColumnName(User.Columns.ID)))

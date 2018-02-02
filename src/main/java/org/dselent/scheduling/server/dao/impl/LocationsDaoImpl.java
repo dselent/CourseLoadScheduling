@@ -21,6 +21,15 @@ import org.springframework.stereotype.Repository;
 public class LocationsDaoImpl extends BaseDaoImpl<Location> implements LocationsDao {
 
     @Override
+    protected String getTableName(){ return Location.TABLE_NAME; }
+
+    @Override
+    protected String getIdColumnName(){ return Location.getColumnName(Location.Columns.ID); }
+
+    @Override
+    protected List<String> getColumnNameList(){ return Location.getColumnNameList(); }
+
+    @Override
     public List<Location> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException{
         LocationsExtractor extractor = new LocationsExtractor();
         String queryTemplate = QueryStringBuilder.generateSelectString(Location.TABLE_NAME, selectColumnNameList, queryTermList, orderByList);
@@ -39,68 +48,6 @@ public class LocationsDaoImpl extends BaseDaoImpl<Location> implements Locations
     }
 
     @Override
-    public Location findById(int id) throws SQLException{
-        String columnName = QueryStringBuilder.convertColumnName(Location.getColumnName(Location.Columns.ID), false);
-        List<String> selectColumnNames = Location.getColumnNameList();
-
-        List<QueryTerm> queryTermList = new ArrayList<>();
-        QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-        queryTermList.add(idTerm);
-
-        List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-        Pair<String, ColumnOrder> order = new Pair<>(columnName, ColumnOrder.ASC);
-        orderByList.add(order);
-
-        List<Location> locationsList = select(selectColumnNames, queryTermList, orderByList);
-
-        Location location = null;
-
-        if(!locationsList.isEmpty()){
-            location = locationsList.get(0);
-        }
-
-        return location;
-    }
-
-    @Override
-    public int update(String columnName, Object newValue, List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateUpdateString(Location.TABLE_NAME, columnName, queryTermList);
-
-        List<Object> objectList = new ArrayList<>();
-        objectList.add(newValue);
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    @Override
-    public int delete(List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateDeleteString(Location.TABLE_NAME, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
     protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Location locationModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
@@ -138,6 +85,7 @@ public class LocationsDaoImpl extends BaseDaoImpl<Location> implements Locations
         }
     }
 
+    @Override
     protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Location locationModel)
     {
         if(keyHolderColumnName.equals(Location.getColumnName(Location.Columns.ID)))
@@ -169,16 +117,4 @@ public class LocationsDaoImpl extends BaseDaoImpl<Location> implements Locations
         }
     }
 
-    @Override
-    public void validateColumnNames(List<String> columnNameList){
-        List<String> actualColumnNames = Location.getColumnNameList();
-        boolean valid = actualColumnNames.containsAll(columnNameList);
-
-        if(!valid){
-            List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-            invalidColumnNames.removeAll(actualColumnNames);
-
-            throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-        }
-    }
 }
