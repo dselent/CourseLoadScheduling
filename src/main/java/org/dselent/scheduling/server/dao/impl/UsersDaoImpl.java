@@ -32,10 +32,16 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 	protected String getTableName(){ return User.TABLE_NAME; }
 
 	@Override
+	protected String getIdColumnName(){ return User.getColumnName(User.Columns.ID); }
+
+	@Override
+	protected List<String> getColumnNameList(){ return User.getColumnNameList(); }
+
+	@Override
 	public List<User> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
 	{
 		UsersExtractor extractor = new UsersExtractor();
-		String queryTemplate = QueryStringBuilder.generateSelectString(User.TABLE_NAME, selectColumnNameList, queryTermList, orderByList);
+		String queryTemplate = QueryStringBuilder.generateSelectString(getTableName(), selectColumnNameList, queryTermList, orderByList);
 
 		List<Object> objectList = new ArrayList<Object>();
 		
@@ -51,32 +57,6 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 	    return usersList;
 	}
 
-	@Override
-	public User findById(int id) throws SQLException
-	{
-		String columnName = QueryStringBuilder.convertColumnName(User.getColumnName(User.Columns.ID), false);
-		List<String> selectColumnNames = User.getColumnNameList();
-		
-		List<QueryTerm> queryTermList = new ArrayList<>();
-		QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-		queryTermList.add(idTerm);
-		
-		List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-		Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
-		orderByList.add(order);
-		
-		List<User> usersList = select(selectColumnNames, queryTermList, orderByList);
-	
-	    User user = null;
-	    
-	    if(!usersList.isEmpty())
-	    {
-	    	user = usersList.get(0);
-	    }
-	    
-	    return user;
-	}
-	
 	protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, User userModel)
 	{
 		String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
@@ -174,19 +154,5 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
     		throw new IllegalArgumentException("Invalid column name provided: " + keyHolderColumnName);
     	}
 	}
-	
-	@Override
-	public void validateColumnNames(List<String> columnNameList)
-	{
-		List<String> actualColumnNames = User.getColumnNameList();
-		boolean valid = actualColumnNames.containsAll(columnNameList);
-		
-		if(!valid)
-		{
-			List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-			invalidColumnNames.removeAll(actualColumnNames);
-			
-			throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-		}
-	}
+
 }
