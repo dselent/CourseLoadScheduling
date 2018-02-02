@@ -28,6 +28,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 {
+	@Override
+	protected String getTableName(){
+		return User.TABLE_NAME;
+	}
 
 	@Override
 	public List<User> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
@@ -75,45 +79,6 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 	    return user;
 	}
 	
-	@Override
-	public int update(String columnName, Object newValue, List<QueryTerm> queryTermList)
-	{
-		String queryTemplate = QueryStringBuilder.generateUpdateString(User.TABLE_NAME, columnName, queryTermList);
-
-		List<Object> objectList = new ArrayList<Object>();
-		objectList.add(newValue);
-		
-		for(QueryTerm queryTerm : queryTermList)
-		{
-			objectList.add(queryTerm.getValue());
-		}
-		
-	    Object[] parameters = objectList.toArray();
-		 
-	    int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-	    
-		return rowsAffected;
-	}
-	
-	@Override
-	public int delete(List<QueryTerm> queryTermList)
-	{
-		String queryTemplate = QueryStringBuilder.generateDeleteString(User.TABLE_NAME, queryTermList);
-
-		List<Object> objectList = new ArrayList<Object>();
-		
-		for(QueryTerm queryTerm : queryTermList)
-		{
-			objectList.add(queryTerm.getValue());
-		}
-		
-	    Object[] parameters = objectList.toArray();
-		 
-	    int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-	    
-		return rowsAffected;
-	}
-
 	protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, User userModel)
 	{
 		String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
