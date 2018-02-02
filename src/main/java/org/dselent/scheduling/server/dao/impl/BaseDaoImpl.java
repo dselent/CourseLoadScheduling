@@ -2,7 +2,6 @@ package org.dselent.scheduling.server.dao.impl;
 
 import org.dselent.scheduling.server.dao.Dao;
 import org.dselent.scheduling.server.model.Model;
-import org.dselent.scheduling.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -26,7 +25,7 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
-	public abstract int insert(User userModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException;
+	public abstract int insert(M model, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException;
 
 	// perhaps find a nice way to abstract some of the extending classes here
 
