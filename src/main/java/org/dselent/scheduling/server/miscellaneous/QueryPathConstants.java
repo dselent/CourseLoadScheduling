@@ -20,7 +20,14 @@ public class QueryPathConstants
 	private static String SQL_EXTENSION = ".sql";
 
 	private static String USERS_WITH_ROLE_PATH = BASE_QUERY_PATH + "CustomUsersWithRole" + SQL_EXTENSION;
-
+	private static String GET_ALL_COURSES_PATH = BASE_QUERY_PATH + "GetAllCourses" + SQL_EXTENSION;
+	private static String GET_ALL_PROFS_DEPTS_PATH = BASE_QUERY_PATH + "GetAllProfsDepts" + SQL_EXTENSION;
+	private static String GET_ALL_REQUESTS_PATH = BASE_QUERY_PATH + "GetAllRequests" + SQL_EXTENSION;
+	private static String GET_COURSE_INFO_PATH = BASE_QUERY_PATH + "GetCourseInfo" + SQL_EXTENSION;
+	private static String GET_COURSES_ONE_PROF_PATH = BASE_QUERY_PATH + "GetCoursesOneProf" + SQL_EXTENSION;
+	private static String GET_DEPT_ONE_COURSE_PATH = BASE_QUERY_PATH + "GetDeptOneCourse" + SQL_EXTENSION;
+	private static String GET_PROFS_ONE_COURSE_PATH = BASE_QUERY_PATH + "GetProfsOneCourse" + SQL_EXTENSION;
+	private static String GET_REQUIRED_CREDITS_PATH = BASE_QUERY_PATH + "GetRequiredCredits" + SQL_EXTENSION;
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	
