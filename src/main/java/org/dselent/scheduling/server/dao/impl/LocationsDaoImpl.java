@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public class LocationsDaoImpl extends BaseDaoImpl<Location> implements LocationsDao {
+public abstract class LocationsDaoImpl extends BaseDaoImpl<Location> implements LocationsDao {
 
     @Override
     public int insert(Location locationModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException{
