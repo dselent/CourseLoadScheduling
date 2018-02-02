@@ -28,7 +28,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> implements CourseRequestsDao
 {
+    @Override
+    protected String getTableName(){ return CourseRequest.TABLE_NAME; }
 
+    @Override
+    protected String getIdColumnName(){ return CourseRequest.getColumnName(CourseRequest.Columns.ID); }
+
+    @Override
+    protected List<String> getColumnNameList(){ return CourseRequest.getColumnNameList(); }
 
 
     @Override
@@ -52,70 +59,6 @@ public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> i
     }
 
     @Override
-    public CourseRequest findById(int id) throws SQLException
-    {
-        String columnName = QueryStringBuilder.convertColumnName(CourseRequest.getColumnName(CourseRequest.Columns.ID), false);
-        List<String> selectColumnNames = CourseRequest.getColumnNameList();
-
-        List<QueryTerm> queryTermList = new ArrayList<>();
-        QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-        queryTermList.add(idTerm);
-
-        List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-        Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
-        orderByList.add(order);
-
-        List<CourseRequest> courseRequestsList = select(selectColumnNames, queryTermList, orderByList);
-
-        CourseRequest courseRequest = null;
-
-        if(!courseRequestsList.isEmpty())
-        {
-            courseRequest = courseRequestsList.get(0);
-        }
-
-        return courseRequest;
-    }
-
-    @Override
-    public int update(String columnName, Object newValue, List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateUpdateString(CourseRequest.TABLE_NAME, columnName, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-        objectList.add(newValue);
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    @Override
-    public int delete(List<QueryTerm> queryTermList)
-    {
-        String queryTemplate = QueryStringBuilder.generateDeleteString(CourseRequest.TABLE_NAME, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-
-        for(QueryTerm queryTerm : queryTermList)
-        {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
     protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, CourseRequest courseRequestModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
@@ -153,6 +96,7 @@ public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> i
         }
     }
 
+    @Override
     protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, CourseRequest courseRequestModel)
     {
         if(keyHolderColumnName.equals(CourseRequest.getColumnName(CourseRequest.Columns.ID)))
@@ -183,18 +127,4 @@ public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> i
         }
     }
 
-    @Override
-    public void validateColumnNames(List<String> columnNameList)
-    {
-        List<String> actualColumnNames = CourseRequest.getColumnNameList();
-        boolean valid = actualColumnNames.containsAll(columnNameList);
-
-        if(!valid)
-        {
-            List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-            invalidColumnNames.removeAll(actualColumnNames);
-
-            throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-        }
-    }
 }
