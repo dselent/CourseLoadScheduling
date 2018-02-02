@@ -29,9 +29,7 @@ import org.springframework.stereotype.Repository;
 public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 {
 	@Override
-	protected String getTableName(){
-		return User.TABLE_NAME;
-	}
+	protected String getTableName(){ return User.TABLE_NAME; }
 
 	@Override
 	public List<User> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
