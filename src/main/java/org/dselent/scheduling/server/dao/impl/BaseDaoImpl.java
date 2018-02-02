@@ -1,8 +1,11 @@
 package org.dselent.scheduling.server.dao.impl;
 
 import org.dselent.scheduling.server.dao.Dao;
+import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.Model;
+import org.dselent.scheduling.server.sqlutils.ColumnOrder;
+import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,8 +36,11 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
-	// Forces subclasses to implement, required for insert, delete, and update to work
+	// Forces subclasses to implement, required for insert, delete, update, findById, and validateColumnNames to work
 	protected abstract String getTableName();
+	protected abstract String getIdColumnName();
+	protected abstract List<String> getColumnNameList();
+
 	protected abstract void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, M model);
 	protected abstract void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, M model);
 
@@ -118,6 +124,43 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 		return rowsAffected;
 	}
 
+	public M findById(int id) throws SQLException
+	{
+		String columnName = QueryStringBuilder.convertColumnName(getIdColumnName(), false);
+		List<String> selectColumnNames = getColumnNameList();
 
-	// perhaps find a nice way to abstract some of the extending classes here
+		List<QueryTerm> queryTermList = new ArrayList<>();
+		QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
+		queryTermList.add(idTerm);
+
+		List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
+		Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
+		orderByList.add(order);
+
+		List<M> modelsList = select(selectColumnNames, queryTermList, orderByList);
+
+		M model = null;
+
+		if(!modelsList.isEmpty())
+		{
+			model = modelsList.get(0);
+		}
+
+		return model;
+	}
+
+	public void validateColumnNames(List<String> columnNameList)
+	{
+		List<String> actualColumnNames = getColumnNameList();
+		boolean valid = actualColumnNames.containsAll(columnNameList);
+
+		if(!valid)
+		{
+			List<String> invalidColumnNames = new ArrayList<>(columnNameList);
+			invalidColumnNames.removeAll(actualColumnNames);
+
+			throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
+		}
+	}
+
 }
