@@ -33,12 +33,24 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
+	// Forces subclasses to implement, required for insert, delete, and update to work
 	protected abstract String getTableName();
-
 	protected abstract void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, M model);
 	protected abstract void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, M model);
 
-	// This can be shared amongst all the DAO's so it is implemented here
+	/*
+	 These can be shared amongst all the DAO's so it is implemented here
+	 Replaced Model specific references with M or model
+	 	User -> M
+	 	userModel -> model
+
+	 This is where getTableName() becomes necessary. The only unique attribute of all these methods is the TABLE_NAME
+	 So instead of making that one small edit in each DaoImpl, we just call the method getTableName()
+	 Since getTableName() is overridden by each DaoImpl, it returns the correct result according the the Model
+
+	 The same concept applies to addObjectValue and addParameterMapValue
+	*/
+
 	public int insert(M model, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException
 	{
 		validateColumnNames(insertColumnNameList);
