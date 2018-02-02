@@ -10,6 +10,11 @@ public class CourseSection extends Model{
 
     public static final String TABLE_NAME = "course_sections";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     public static enum Columns{
         ID,
         COURSES_ID,

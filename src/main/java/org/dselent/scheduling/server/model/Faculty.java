@@ -13,6 +13,11 @@ public class Faculty extends Model {
     // table name
     public static final String TABLE_NAME = "faculty";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     // column names
     public static enum Columns
     {

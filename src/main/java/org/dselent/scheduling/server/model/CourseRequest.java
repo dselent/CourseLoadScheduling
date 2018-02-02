@@ -10,6 +10,11 @@ public class CourseRequest extends Model {
     // Table Name
     public static final String TABLE_NAME = "course_requests";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     // Column Names
     public static enum Columns{
         ID,

@@ -11,6 +11,11 @@ public class Location extends Model {
     // Table Name
     public static final String TABLE_NAME = "locations";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     // Column Names
     public static enum Columns{
         ID,

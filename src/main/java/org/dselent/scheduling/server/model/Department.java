@@ -9,6 +9,11 @@ public class Department extends Model {
 
     public static final String TABLE_NAME = "departments";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     public static enum Columns{
         ID,
         DEPARTMENT,

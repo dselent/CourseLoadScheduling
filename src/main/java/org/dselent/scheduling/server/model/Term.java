@@ -10,6 +10,11 @@ public class Term extends Model
     // Table Name
     public static final String TABLE_NAME = "terms";
 
+    @Override
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     // Column Names
     public static enum Columns
     {

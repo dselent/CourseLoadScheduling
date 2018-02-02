@@ -10,6 +10,11 @@ public class User extends Model
 {
 	// Table Name
 	public static final String TABLE_NAME = "users";
+
+	@Override
+	public String getTableName(){
+		return TABLE_NAME;
+	}
 		
 	// Column Names
 	public static enum Columns
@@ -33,6 +38,7 @@ public class User extends Model
 	
 	static
 	{
+
 		for(Columns key : Columns.values())
 		{
 			COLUMN_LIST.add(key);
