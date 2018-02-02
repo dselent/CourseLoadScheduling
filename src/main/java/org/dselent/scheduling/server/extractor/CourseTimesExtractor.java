@@ -22,7 +22,6 @@ public class CourseTimesExtractor extends Extractor<List<CourseTime>> {
             }
 
 
-//            result.setFacultyId(rs.getInt(CourseRequest.getColumnName(CourseRequest.Columns.FACULTY_ID)));
             result.setCourseSectionsId(rs.getInt(CourseTime.getColumnName(CourseTime.Columns.COURSE_SECTIONS_ID)));
             if (rs.wasNull()) {
                 result.setCourseSectionsId(null);
