@@ -15,38 +15,10 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public abstract class LocationsDaoImpl extends BaseDaoImpl<Location> implements LocationsDao {
-
-    @Override
-    public int insert(Location locationModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException{
-
-        validateColumnNames(insertColumnNameList);
-        validateColumnNames(keyHolderColumnNameList);
-
-        String queryTemplate = QueryStringBuilder.generateInsertString(Location.TABLE_NAME, insertColumnNameList);
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        List<Map<String, Object>> keyList = new ArrayList<>();
-        KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-
-        for(String insertColumnName : insertColumnNameList){
-            addParameterMapValue(parameters, insertColumnName, locationModel);
-        }
-
-        int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-
-        Map<String, Object> keyMap = keyHolder.getKeys();
-
-        for(String keyHolderColumnName : keyHolderColumnNameList){
-            addObjectValue(keyMap, keyHolderColumnName, locationModel);
-        }
-
-        return rowsAffected;
-    }
+@Repository
+public class LocationsDaoImpl extends BaseDaoImpl<Location> implements LocationsDao {
 
     @Override
     public List<Location> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException{
@@ -129,7 +101,7 @@ public abstract class LocationsDaoImpl extends BaseDaoImpl<Location> implements 
         return rowsAffected;
     }
 
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Location locationModel)
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Location locationModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
@@ -166,7 +138,7 @@ public abstract class LocationsDaoImpl extends BaseDaoImpl<Location> implements 
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Location locationModel)
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Location locationModel)
     {
         if(keyHolderColumnName.equals(Location.getColumnName(Location.Columns.ID)))
         {

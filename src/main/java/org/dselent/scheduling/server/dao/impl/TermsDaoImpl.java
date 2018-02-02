@@ -15,8 +15,6 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
@@ -28,42 +26,8 @@ import org.springframework.stereotype.Repository;
  * https://howtodoinjava.com/spring/spring-core/how-to-use-spring-component-repository-service-and-controller-annotations/
  */
 @Repository
-public abstract class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
+public class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
 {
-    @Override
-    public int insert(Term termModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException
-    {
-
-        validateColumnNames(insertColumnNameList);
-        validateColumnNames(keyHolderColumnNameList);
-
-        String queryTemplate = QueryStringBuilder.generateInsertString(Term.TABLE_NAME, insertColumnNameList);
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        List<Map<String, Object>> keyList = new ArrayList<>();
-        KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-
-        for(String insertColumnName : insertColumnNameList)
-        {
-            addParameterMapValue(parameters, insertColumnName, termModel);
-        }
-        // new way, but unfortunately unnecessary class creation is slow and wasteful (i.e. wrong)
-        // insertColumnNames.forEach(insertColumnName -> addParameterMap(parameters, insertColumnName, userModel));
-
-        int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-
-        Map<String, Object> keyMap = keyHolder.getKeys();
-
-        for(String keyHolderColumnName : keyHolderColumnNameList)
-        {
-            addObjectValue(keyMap, keyHolderColumnName, termModel);
-        }
-
-        return rowsAffected;
-
-    }
-
-
     @Override
     public List<Term> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
     {
@@ -149,7 +113,7 @@ public abstract class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
         return rowsAffected;
     }
 
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Term termModel)
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Term termModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
@@ -182,7 +146,7 @@ public abstract class TermsDaoImpl extends BaseDaoImpl<Term> implements TermsDao
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Term termModel)
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Term termModel)
     {
         if(keyHolderColumnName.equals(Term.getColumnName(Term.Columns.ID)))
         {
