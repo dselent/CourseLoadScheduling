@@ -32,13 +32,6 @@ public class UsersExtractor extends Extractor<List<User>>
 			result.setEncryptedPassword(rs.getString(User.getColumnName(User.Columns.ENCRYPTED_PASSWORD)));
 			result.setSalt(rs.getString(User.getColumnName(User.Columns.SALT)));
 			
-			result.setUserStateId(rs.getInt(User.getColumnName(User.Columns.USER_STATE_ID)));
-			
-			if(rs.wasNull())
-			{
-				result.setUserStateId(null);
-			}
-			
 			result.setCreatedAt(rs.getTimestamp(User.getColumnName(User.Columns.CREATED_AT)));
 			result.setUpdatedAt(rs.getTimestamp(User.getColumnName(User.Columns.UPDATED_AT)));
 		

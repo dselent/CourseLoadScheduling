@@ -1,4 +1,4 @@
-package org.dselent.scheduling.server.extractor;
+/*package org.dselent.scheduling.server.extractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +30,7 @@ public class UsersRolesLinksExtractor extends Extractor<List<UsersRolesLink>>
 			
 			if(rs.wasNull())
 			{
-				result.setId(null);
+				result.setUserId(null);
 			}
 			
 			result.setRoleId(rs.getInt(UsersRolesLink.getColumnName(UsersRolesLink.Columns.ROLE_ID)));
@@ -49,3 +49,4 @@ public class UsersRolesLinksExtractor extends Extractor<List<UsersRolesLink>>
 	}
 
 }
+*/

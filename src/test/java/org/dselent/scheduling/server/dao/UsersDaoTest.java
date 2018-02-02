@@ -42,7 +42,7 @@ public class UsersDaoTest
     	user1.setEmail("userone@wpi.edu");
     	user1.setEncryptedPassword("11111111"); // simplified for now
     	user1.setSalt("11111111"); // also simplified for now
-    	user1.setUserStateId(1); // assumes 1 = activated
+    	//user1.setUserStateId(1); // assumes 1 = activated
     	
     	List<String> insertColumnNameList = new ArrayList<>();
     	List<String> keyHolderColumnNameList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class UsersDaoTest
     	insertColumnNameList.add(User.getColumnName(User.Columns.EMAIL));
     	insertColumnNameList.add(User.getColumnName(User.Columns.ENCRYPTED_PASSWORD));
     	insertColumnNameList.add(User.getColumnName(User.Columns.SALT));
-    	insertColumnNameList.add(User.getColumnName(User.Columns.USER_STATE_ID));
+    	//insertColumnNameList.add(User.getColumnName(User.Columns.USER_STATE_ID));
     	
     	keyHolderColumnNameList.add(User.getColumnName(User.Columns.ID));
     	keyHolderColumnNameList.add(User.getColumnName(User.Columns.CREATED_AT));
