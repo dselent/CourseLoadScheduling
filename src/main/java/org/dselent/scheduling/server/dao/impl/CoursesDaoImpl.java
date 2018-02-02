@@ -19,37 +19,16 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public abstract class CoursesDaoImpl extends BaseDaoImpl<Course> implements CoursesDao {
+public class CoursesDaoImpl extends BaseDaoImpl<Course> implements CoursesDao {
+
     @Override
+    protected String getTableName(){ return Course.TABLE_NAME; }
 
-    public int insert(Course courseModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException {
+    @Override
+    protected String getIdColumnName(){ return Course.getColumnName(Course.Columns.ID); }
 
-        validateColumnNames(insertColumnNameList);
-        validateColumnNames(keyHolderColumnNameList);
-
-        String queryTemplate = QueryStringBuilder.generateInsertString(Course.TABLE_NAME, insertColumnNameList);
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        List<Map<String, Object>> keyList = new ArrayList<>();
-        KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-
-        for (String insertColumnName : insertColumnNameList) {
-            addParameterMapValue(parameters, insertColumnName, courseModel);
-        }
-        // new way, but unfortunately unnecessary class creation is slow and wasteful (i.e. wrong)
-        // insertColumnNames.forEach(insertColumnName -> addParameterMap(parameters, insertColumnName, userModel));
-
-        int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-
-        Map<String, Object> keyMap = keyHolder.getKeys();
-
-        for (String keyHolderColumnName : keyHolderColumnNameList) {
-            addObjectValue(keyMap, keyHolderColumnName, courseModel);
-        }
-
-        return rowsAffected;
-
-    }
+    @Override
+    protected List<String> getColumnNameList(){ return Course.getColumnNameList(); }
 
 
     @Override
@@ -69,67 +48,9 @@ public abstract class CoursesDaoImpl extends BaseDaoImpl<Course> implements Cour
 
         return courseList;
     }
-
     @Override
-    public Course findById(int id) throws SQLException {
-        String columnName = QueryStringBuilder.convertColumnName(Course.getColumnName(Course.Columns.ID), false);
-        List<String> selectColumnNames = Course.getColumnNameList();
-
-        List<QueryTerm> queryTermList = new ArrayList<>();
-        QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-        queryTermList.add(idTerm);
-
-        List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-        Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
-        orderByList.add(order);
-
-        List<Course> courseList = select(selectColumnNames, queryTermList, orderByList);
-
-        Course course = null;
-
-        if (!courseList.isEmpty()) {
-            course = courseList.get(0);
-        }
-
-        return course;
-    }
-
-    @Override
-    public int update(String columnName, Object newValue, List<QueryTerm> queryTermList) {
-        String queryTemplate = QueryStringBuilder.generateUpdateString(Course.TABLE_NAME, columnName, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-        objectList.add(newValue);
-
-        for (QueryTerm queryTerm : queryTermList) {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    @Override
-    public int delete(List<QueryTerm> queryTermList) {
-        String queryTemplate = QueryStringBuilder.generateDeleteString(Course.TABLE_NAME, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-
-        for (QueryTerm queryTerm : queryTermList) {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Course courseModel) {
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Course courseModel)
+    {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
         // Wish this could generalize
@@ -153,8 +74,9 @@ public abstract class CoursesDaoImpl extends BaseDaoImpl<Course> implements Cour
             throw new IllegalArgumentException("Invalid column name provided: " + insertColumnName);
         }
     }
-
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Course courseModel) {
+    @Override
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Course courseModel)
+    {
         if (keyHolderColumnName.equals(Course.getColumnName(Course.Columns.ID))) {
             courseModel.setId((Integer) keyMap.get(keyHolderColumnName));
         } else if (keyHolderColumnName.equals(Course.getColumnName(Course.Columns.COURSE_NAME))) {
@@ -173,16 +95,4 @@ public abstract class CoursesDaoImpl extends BaseDaoImpl<Course> implements Cour
         }
     }
 
-    @Override
-    public void validateColumnNames(List<String> columnNameList) {
-        List<String> actualColumnNames = Course.getColumnNameList();
-        boolean valid = actualColumnNames.containsAll(columnNameList);
-
-        if (!valid) {
-            List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-            invalidColumnNames.removeAll(actualColumnNames);
-
-            throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-        }
-    }
 }

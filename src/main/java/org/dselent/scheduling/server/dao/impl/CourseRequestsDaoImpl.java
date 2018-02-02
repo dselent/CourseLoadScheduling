@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
  * https://howtodoinjava.com/spring/spring-core/how-to-use-spring-component-repository-service-and-controller-annotations/
  */
 @Repository
-public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> implements CourseRequestsDao
+public class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> implements CourseRequestsDao
 {
     @Override
     protected String getTableName(){ return CourseRequest.TABLE_NAME; }
