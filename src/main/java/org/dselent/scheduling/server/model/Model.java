@@ -7,6 +7,7 @@ package org.dselent.scheduling.server.model;
  * 3.  I couldn't think of a better way (open to suggestions)
  */
 
+
 /**
  * Models are 1-to-1 mappings from database tables to Java classes.
  * Each database table will have a corresponding model object holding
@@ -17,5 +18,5 @@ package org.dselent.scheduling.server.model;
  */
 public abstract class Model
 {
-	
+    public abstract String getTableName();
 }
