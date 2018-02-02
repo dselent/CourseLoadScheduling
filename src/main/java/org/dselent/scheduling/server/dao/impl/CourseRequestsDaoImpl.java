@@ -15,8 +15,6 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
@@ -30,38 +28,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> implements CourseRequestsDao
 {
-    @Override
-    public int insert(CourseRequest courseRequestModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException
-    {
 
-        validateColumnNames(insertColumnNameList);
-        validateColumnNames(keyHolderColumnNameList);
-
-        String queryTemplate = QueryStringBuilder.generateInsertString(CourseRequest.TABLE_NAME, insertColumnNameList);
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        List<Map<String, Object>> keyList = new ArrayList<>();
-        KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-
-        for(String insertColumnName : insertColumnNameList)
-        {
-            addParameterMapValue(parameters, insertColumnName, courseRequestModel);
-        }
-        // new way, but unfortunately unnecessary class creation is slow and wasteful (i.e. wrong)
-        // insertColumnNames.forEach(insertColumnName -> addParameterMap(parameters, insertColumnName, courseRequestModel));
-
-        int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-
-        Map<String, Object> keyMap = keyHolder.getKeys();
-
-        for(String keyHolderColumnName : keyHolderColumnNameList)
-        {
-            addObjectValue(keyMap, keyHolderColumnName, courseRequestModel);
-        }
-
-        return rowsAffected;
-
-    }
 
 
     @Override
@@ -149,7 +116,7 @@ public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> i
         return rowsAffected;
     }
 
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, CourseRequest courseRequestModel)
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, CourseRequest courseRequestModel)
     {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
@@ -186,7 +153,7 @@ public abstract class CourseRequestsDaoImpl extends BaseDaoImpl<CourseRequest> i
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, CourseRequest courseRequestModel)
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, CourseRequest courseRequestModel)
     {
         if(keyHolderColumnName.equals(CourseRequest.getColumnName(CourseRequest.Columns.ID)))
         {
