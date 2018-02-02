@@ -11,11 +11,6 @@ public class User extends Model
 	// Table Name
 	public static final String TABLE_NAME = "users";
 
-	@Override
-	public String getTableName(){
-		return TABLE_NAME;
-	}
-		
 	// Column Names
 	public static enum Columns
 	{

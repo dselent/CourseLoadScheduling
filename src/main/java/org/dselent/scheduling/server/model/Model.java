@@ -18,5 +18,4 @@ package org.dselent.scheduling.server.model;
  */
 public abstract class Model
 {
-    public abstract String getTableName();
 }
