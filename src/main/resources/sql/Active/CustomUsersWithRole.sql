@@ -5,8 +5,8 @@ FROM users
 WHERE id IN
 (
     SELECT user_id
-    FROM users_roles_links
-    WHERE role_id = :roleId
+    FROM users_permissions
+    WHERE role = :role
 )
 ORDER BY users.id ASC;
 
