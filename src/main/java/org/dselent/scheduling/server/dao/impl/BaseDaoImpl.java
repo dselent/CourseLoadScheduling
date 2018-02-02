@@ -3,6 +3,7 @@ package org.dselent.scheduling.server.dao.impl;
 import org.dselent.scheduling.server.dao.Dao;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.Model;
+import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -32,6 +33,8 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
+	protected abstract String getTableName();
+
 	protected abstract void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, M model);
 	protected abstract void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, M model);
 
@@ -41,7 +44,7 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 		validateColumnNames(insertColumnNameList);
 		validateColumnNames(keyHolderColumnNameList);
 
-		String queryTemplate = QueryStringBuilder.generateInsertString(model.getTableName(), insertColumnNameList);
+		String queryTemplate = QueryStringBuilder.generateInsertString(getTableName(), insertColumnNameList);
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 
 		List<Map<String, Object>> keyList = new ArrayList<>();
@@ -65,6 +68,44 @@ public abstract class BaseDaoImpl<M extends Model> implements Dao<M>
 
 		return rowsAffected;
 	}
+
+	public int delete(List<QueryTerm> queryTermList)
+	{
+		String queryTemplate = QueryStringBuilder.generateDeleteString(getTableName(), queryTermList);
+
+		List<Object> objectList = new ArrayList<Object>();
+
+		for(QueryTerm queryTerm : queryTermList)
+		{
+			objectList.add(queryTerm.getValue());
+		}
+
+		Object[] parameters = objectList.toArray();
+
+		int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
+
+		return rowsAffected;
+	}
+
+	public int update(String columnName, Object newValue, List<QueryTerm> queryTermList)
+	{
+		String queryTemplate = QueryStringBuilder.generateUpdateString(getTableName(), columnName, queryTermList);
+
+		List<Object> objectList = new ArrayList<Object>();
+		objectList.add(newValue);
+
+		for(QueryTerm queryTerm : queryTermList)
+		{
+			objectList.add(queryTerm.getValue());
+		}
+
+		Object[] parameters = objectList.toArray();
+
+		int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
+
+		return rowsAffected;
+	}
+
 
 	// perhaps find a nice way to abstract some of the extending classes here
 }
