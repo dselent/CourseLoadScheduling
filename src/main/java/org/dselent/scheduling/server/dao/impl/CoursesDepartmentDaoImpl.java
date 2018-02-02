@@ -21,38 +21,16 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public abstract class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartment> implements CoursesDepartmentDao {
+public class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartment> implements CoursesDepartmentDao {
+
     @Override
+    protected String getTableName(){ return CourseDepartment.TABLE_NAME; }
 
-    public int insert(CourseDepartment courseDepartmentModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException {
+    @Override
+    protected String getIdColumnName(){ return CourseDepartment.getColumnName(CourseDepartment.Columns.ID); }
 
-        validateColumnNames(insertColumnNameList);
-        validateColumnNames(keyHolderColumnNameList);
-
-        String queryTemplate = QueryStringBuilder.generateInsertString(CourseDepartment.TABLE_NAME, insertColumnNameList);
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        List<Map<String, Object>> keyList = new ArrayList<>();
-        KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-
-        for (String insertColumnName : insertColumnNameList) {
-            addParameterMapValue(parameters, insertColumnName, courseDepartmentModel);
-        }
-        // new way, but unfortunately unnecessary class creation is slow and wasteful (i.e. wrong)
-        // insertColumnNames.forEach(insertColumnName -> addParameterMap(parameters, insertColumnName, userModel));
-
-        int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-
-        Map<String, Object> keyMap = keyHolder.getKeys();
-
-        for (String keyHolderColumnName : keyHolderColumnNameList) {
-            addObjectValue(keyMap, keyHolderColumnName, courseDepartmentModel);
-        }
-
-        return rowsAffected;
-
-    }
-
+    @Override
+    protected List<String> getColumnNameList(){ return CourseDepartment.getColumnNameList(); }
 
     @Override
     public List<CourseDepartment> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException {
@@ -73,65 +51,7 @@ public abstract class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartm
     }
 
     @Override
-    public CourseDepartment findById(int id) throws SQLException {
-        String columnName = QueryStringBuilder.convertColumnName(CourseDepartment.getColumnName(CourseDepartment.Columns.ID), false);
-        List<String> selectColumnNames = CourseDepartment.getColumnNameList();
-
-        List<QueryTerm> queryTermList = new ArrayList<>();
-        QueryTerm idTerm = new QueryTerm(columnName, ComparisonOperator.EQUAL, id, null);
-        queryTermList.add(idTerm);
-
-        List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
-        Pair<String, ColumnOrder> order = new Pair<String, ColumnOrder>(columnName, ColumnOrder.ASC);
-        orderByList.add(order);
-
-        List<CourseDepartment> courseDepartmentList = select(selectColumnNames, queryTermList, orderByList);
-
-        CourseDepartment courseDepartment = null;
-
-        if (!courseDepartmentList.isEmpty()) {
-            courseDepartment = courseDepartmentList.get(0);
-        }
-
-        return courseDepartment;
-    }
-
-    @Override
-    public int update(String columnName, Object newValue, List<QueryTerm> queryTermList) {
-        String queryTemplate = QueryStringBuilder.generateUpdateString(CourseDepartment.TABLE_NAME, columnName, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-        objectList.add(newValue);
-
-        for (QueryTerm queryTerm : queryTermList) {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    @Override
-    public int delete(List<QueryTerm> queryTermList) {
-        String queryTemplate = QueryStringBuilder.generateDeleteString(CourseDepartment.TABLE_NAME, queryTermList);
-
-        List<Object> objectList = new ArrayList<Object>();
-
-        for (QueryTerm queryTerm : queryTermList) {
-            objectList.add(queryTerm.getValue());
-        }
-
-        Object[] parameters = objectList.toArray();
-
-        int rowsAffected = jdbcTemplate.update(queryTemplate, parameters);
-
-        return rowsAffected;
-    }
-
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, CourseDepartment courseModel) {
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, CourseDepartment courseModel) {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
         // Wish this could generalize
@@ -170,7 +90,8 @@ public abstract class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartm
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, CourseDepartment courseModel) {
+    @Override
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, CourseDepartment courseModel) {
         if (keyHolderColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.ID)))
         {
             courseModel.setId((Integer) keyMap.get(keyHolderColumnName));
@@ -198,16 +119,4 @@ public abstract class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartm
         }
     }
 
-    @Override
-    public void validateColumnNames(List<String> columnNameList) {
-        List<String> actualColumnNames = CourseDepartment.getColumnNameList();
-        boolean valid = actualColumnNames.containsAll(columnNameList);
-
-        if (!valid) {
-            List<String> invalidColumnNames = new ArrayList<>(columnNameList);
-            invalidColumnNames.removeAll(actualColumnNames);
-
-            throw new IllegalArgumentException("Invalid column names provided: " + invalidColumnNames);
-        }
-    }
 }
