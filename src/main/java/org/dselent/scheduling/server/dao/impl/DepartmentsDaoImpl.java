@@ -7,22 +7,51 @@ import java.util.List;
 import java.util.Map;
 
 import org.dselent.scheduling.server.dao.DepartmentsDao;
-import org.dselent.scheduling.server.dao.DepartmentsDao;
 import org.dselent.scheduling.server.extractor.DepartmentsExtractor;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.Department;
-import org.dselent.scheduling.server.model.Department;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
-import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+
 import org.springframework.stereotype.Repository;
 
-public abstract class DepartmentsDaoImpl extends BaseDaoImpl<Department> implements DepartmentsDao {
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Department DepartmentModel) {
+@Repository
+public class DepartmentsDaoImpl extends BaseDaoImpl<Department> implements DepartmentsDao {
+
+
+    @Override
+    protected String getTableName(){ return Department.TABLE_NAME; }
+
+    @Override
+    protected String getIdColumnName(){ return Department.getColumnName(Department.Columns.ID); }
+
+    @Override
+    protected List<String> getColumnNameList(){ return Department.getColumnNameList(); }
+
+    @Override
+    public List<Department> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
+    {
+        DepartmentsExtractor extractor = new DepartmentsExtractor();
+        String queryTemplate = QueryStringBuilder.generateSelectString(getTableName(), selectColumnNameList, queryTermList, orderByList);
+
+        List<Object> objectList = new ArrayList<Object>();
+
+        for(QueryTerm queryTerm : queryTermList)
+        {
+            objectList.add(queryTerm.getValue());
+        }
+
+        Object[] parameters = objectList.toArray();
+
+        List<Department> departmentsList = jdbcTemplate.query(queryTemplate, extractor, parameters);
+
+        return departmentsList;
+    }
+
+    @Override
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Department DepartmentModel) {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
         // Wish this could generalize
@@ -45,7 +74,8 @@ public abstract class DepartmentsDaoImpl extends BaseDaoImpl<Department> impleme
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Department DepartmentModel) {
+    @Override
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Department DepartmentModel) {
         if (keyHolderColumnName.equals(Department.getColumnName(Department.Columns.ID))) {
             DepartmentModel.setId((Integer) keyMap.get(keyHolderColumnName));
         } else if (keyHolderColumnName.equals(Department.getColumnName(Department.Columns.DEPARTMENT))) {
