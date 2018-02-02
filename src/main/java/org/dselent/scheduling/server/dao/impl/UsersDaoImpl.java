@@ -15,8 +15,6 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
@@ -30,40 +28,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 {
-	@Override
-	public int insert(User userModel, List<String> insertColumnNameList, List<String> keyHolderColumnNameList) throws SQLException
-	{
-		
-		validateColumnNames(insertColumnNameList);
-		validateColumnNames(keyHolderColumnNameList);
 
-		String queryTemplate = QueryStringBuilder.generateInsertString(User.TABLE_NAME, insertColumnNameList);
-	    MapSqlParameterSource parameters = new MapSqlParameterSource();
-	    
-	    List<Map<String, Object>> keyList = new ArrayList<>();
-	    KeyHolder keyHolder = new GeneratedKeyHolder(keyList);
-	    
-	    for(String insertColumnName : insertColumnNameList)
-	    {
-	    	addParameterMapValue(parameters, insertColumnName, userModel);
-	    }
-	    // new way, but unfortunately unnecessary class creation is slow and wasteful (i.e. wrong)
-	    // insertColumnNames.forEach(insertColumnName -> addParameterMap(parameters, insertColumnName, userModel));
-	    
-	    int rowsAffected = namedParameterJdbcTemplate.update(queryTemplate, parameters, keyHolder);
-	    
-	    Map<String, Object> keyMap = keyHolder.getKeys();
-	    
-	    for(String keyHolderColumnName : keyHolderColumnNameList)
-	    {
-	    	addObjectValue(keyMap, keyHolderColumnName, userModel);
-	    }
-	    	    
-	    return rowsAffected;
-		
-	}
-	
-	
 	@Override
 	public List<User> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
 	{
@@ -149,7 +114,7 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
 		return rowsAffected;
 	}
 
-	private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, User userModel)
+	protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, User userModel)
 	{
 		String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
     	
@@ -201,7 +166,7 @@ public class UsersDaoImpl extends BaseDaoImpl<User> implements UsersDao
     	}
 	}	
 
-	private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, User userModel)
+	protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, User userModel)
 	{
     	if(keyHolderColumnName.equals(User.getColumnName(User.Columns.ID)))
     	{
