@@ -12,15 +12,44 @@ import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.Faculty;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
-import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-public abstract class FacultyDaoImpl extends BaseDaoImpl<Faculty> implements FacultyDao {
-    private void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Faculty FacultyModel) {
+@Repository
+public class FacultyDaoImpl extends BaseDaoImpl<Faculty> implements FacultyDao {
+
+    @Override
+    protected String getTableName(){ return Faculty.TABLE_NAME; }
+
+    @Override
+    protected String getIdColumnName(){ return Faculty.getColumnName(Faculty.Columns.ID); }
+
+    @Override
+    protected List<String> getColumnNameList(){ return Faculty.getColumnNameList(); }
+
+    @Override
+    public List<Faculty> select(List<String> selectColumnNameList, List<QueryTerm> queryTermList, List<Pair<String, ColumnOrder>> orderByList) throws SQLException
+    {
+        FacultyExtractor extractor = new FacultyExtractor();
+        String queryTemplate = QueryStringBuilder.generateSelectString(getTableName(), selectColumnNameList, queryTermList, orderByList);
+
+        List<Object> objectList = new ArrayList<Object>();
+
+        for(QueryTerm queryTerm : queryTermList)
+        {
+            objectList.add(queryTerm.getValue());
+        }
+
+        Object[] parameters = objectList.toArray();
+
+        List<Faculty> facultyList = jdbcTemplate.query(queryTemplate, extractor, parameters);
+
+        return facultyList;
+    }
+
+    @Override
+    protected void addParameterMapValue(MapSqlParameterSource parameters, String insertColumnName, Faculty FacultyModel) {
         String parameterName = QueryStringBuilder.convertColumnName(insertColumnName, false);
 
         // Wish this could generalize
@@ -45,7 +74,8 @@ public abstract class FacultyDaoImpl extends BaseDaoImpl<Faculty> implements Fac
         }
     }
 
-    private void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Faculty FacultyModel) {
+    @Override
+    protected void addObjectValue(Map<String, Object> keyMap, String keyHolderColumnName, Faculty FacultyModel) {
         if (keyHolderColumnName.equals(Faculty.getColumnName(Faculty.Columns.ID))) {
             FacultyModel.setId((Integer) keyMap.get(keyHolderColumnName));
         } else if (keyHolderColumnName.equals(Faculty.getColumnName(Faculty.Columns.USERS_ID))) {
