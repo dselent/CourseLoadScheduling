@@ -31,6 +31,12 @@ public class QueryPathConstants
 	
 
 	public static String USERS_WITH_ROLE_QUERY = readFile(USERS_WITH_ROLE_PATH);
+	public static String GET_ALL_COURSES_QUERY = readFile(GET_ALL_COURSES_PATH);
+	public static String GET_ALL_PROFS_DEPTS_QUERY = readFile(GET_ALL_PROFS_DEPTS_PATH);
+	public static String GET_ALL_REQUESTS_QUERY = readFile(GET_ALL_REQUESTS_PATH);
+	public static String GET_COURSES_ONE_PROF_QUERY = readFile(GET_COURSES_ONE_PROF_PATH);
+	public static String GET_DEPT_ONE_PROF_QUERY = readFile(GET_DEPT_ONE_PROF_PATH);
+	public static String GET_PROFS_ONE_COURSE_QUERY = readFile(GET_PROFS_ONE_COURSE_PATH);
 
 	
 	private QueryPathConstants()
