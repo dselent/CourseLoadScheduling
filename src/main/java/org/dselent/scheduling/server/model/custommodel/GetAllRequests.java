@@ -5,7 +5,7 @@ import org.dselent.scheduling.server.model.Model;
 import java.sql.JDBCType;
 import java.util.*;
 
-public class GetAllCourses extends Model {
+public class GetAllRequests extends Model {
 
     // Column Names
     public static enum Columns{
@@ -73,20 +73,19 @@ public class GetAllCourses extends Model {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GetAllCourses that = (GetAllCourses) o;
+        GetAllRequests that = (GetAllRequests) o;
         return Objects.equals(usersId, that.usersId) &&
                 Objects.equals(courseSectionsId, that.courseSectionsId);
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(usersId, courseSectionsId);
     }
 
     @Override
     public String toString() {
-        return "GetAllCourses{" +
+        return "GetAllRequests{" +
                 "usersId=" + usersId +
                 ", courseSectionsId=" + courseSectionsId +
                 '}';
