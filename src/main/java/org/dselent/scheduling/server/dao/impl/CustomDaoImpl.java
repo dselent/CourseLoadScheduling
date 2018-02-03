@@ -23,9 +23,9 @@ public class CustomDaoImpl implements CustomDao
 	@Override
 	public List<User> getAllUsersWithRole(int roleId)
 	{
-		UsersExtractor extractor = new UsersExtractor();
-		String queryTemplate = new String(QueryPathConstants.USERS_WITH_ROLE_QUERY);
+		String queryTemplate = QueryPathConstants.USERS_WITH_ROLE_QUERY;
 	    MapSqlParameterSource parameters = new MapSqlParameterSource();
+		UsersExtractor extractor = new UsersExtractor();
 	    parameters.addValue("roleId", roleId);
 	    List<User> usersWithRoleList = namedParameterJdbcTemplate.query(queryTemplate, parameters, extractor);
 	    return usersWithRoleList;

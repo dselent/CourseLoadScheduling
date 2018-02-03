@@ -16,11 +16,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfig.class})
 @WebAppConfiguration
+@Transactional
 public class UsersDaoTest
 {
 	@Autowired
@@ -36,12 +38,12 @@ public class UsersDaoTest
     	// INSERT
     	
     	User user1 = new User();
-    	user1.setUserName("user1");
+    	user1.setUserName("user");
     	user1.setFirstName("user");
     	user1.setLastName("one");
-    	user1.setEmail("userone@wpi.edu");
+    	user1.setEmail("user@wpi.edu");
     	user1.setEncryptedPassword("11111111"); // simplified for now
-    	user1.setSalt("11111111"); // also simplified for now
+    	user1.setSalt("11111111x"); // also simplified for now
     	user1.setUserStateId(1); // assumes 1 = activated
     	
     	List<String> insertColumnNameList = new ArrayList<>();
@@ -84,6 +86,7 @@ public class UsersDaoTest
     	String selectColumnName = User.getColumnName(User.Columns.USER_NAME);
     	String selectUserName = newUserName;
     	
+    	List<String> selectColumnNameList = User.getColumnNameList();
     	List<QueryTerm> selectQueryTermList = new ArrayList<>();
     	
     	QueryTerm selectUseNameTerm = new QueryTerm();
@@ -91,8 +94,6 @@ public class UsersDaoTest
     	selectUseNameTerm.setComparisonOperator(ComparisonOperator.EQUAL);
     	selectUseNameTerm.setValue(selectUserName);
     	selectQueryTermList.add(selectUseNameTerm);
-    	
-    	List<String> selectColumnNameList = User.getColumnNameList();
     	
     	List<Pair<String, ColumnOrder>> orderByList = new ArrayList<>();
     	Pair<String, ColumnOrder> orderPair1 = new Pair<String, ColumnOrder>(selectColumnName, ColumnOrder.ASC);
