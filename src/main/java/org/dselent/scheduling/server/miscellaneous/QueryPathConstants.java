@@ -23,16 +23,20 @@ public class QueryPathConstants
 	private static String GET_ALL_COURSES_PATH = BASE_QUERY_PATH + "GetAllCourses" + SQL_EXTENSION;
 	private static String GET_ALL_PROFS_DEPTS_PATH = BASE_QUERY_PATH + "GetAllProfsDepts" + SQL_EXTENSION;
 	private static String GET_ALL_REQUESTS_PATH = BASE_QUERY_PATH + "GetAllRequests" + SQL_EXTENSION;
-	private static String GET_COURSE_INFO_PATH = BASE_QUERY_PATH + "GetCourseInfo" + SQL_EXTENSION;
 	private static String GET_COURSES_ONE_PROF_PATH = BASE_QUERY_PATH + "GetCoursesOneProf" + SQL_EXTENSION;
-	private static String GET_DEPT_ONE_COURSE_PATH = BASE_QUERY_PATH + "GetDeptOneCourse" + SQL_EXTENSION;
+	private static String GET_DEPT_ONE_PROF_PATH = BASE_QUERY_PATH + "GetDeptOneProf" + SQL_EXTENSION;
 	private static String GET_PROFS_ONE_COURSE_PATH = BASE_QUERY_PATH + "GetProfsOneCourse" + SQL_EXTENSION;
-	private static String GET_REQUIRED_CREDITS_PATH = BASE_QUERY_PATH + "GetRequiredCredits" + SQL_EXTENSION;
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
 	public static String USERS_WITH_ROLE_QUERY = readFile(USERS_WITH_ROLE_PATH);
+	public static String GET_ALL_COURSES_QUERY = readFile(GET_ALL_COURSES_PATH);
+	public static String GET_ALL_PROFS_DEPTS_QUERY = readFile(GET_ALL_PROFS_DEPTS_PATH);
+	public static String GET_ALL_REQUESTS_QUERY = readFile(GET_ALL_REQUESTS_PATH);
+	public static String GET_COURSES_ONE_PROF_QUERY = readFile(GET_COURSES_ONE_PROF_PATH);
+	public static String GET_DEPT_ONE_PROF_QUERY = readFile(GET_DEPT_ONE_PROF_PATH);
+	public static String GET_PROFS_ONE_COURSE_QUERY = readFile(GET_PROFS_ONE_COURSE_PATH);
 
 	
 	private QueryPathConstants()
