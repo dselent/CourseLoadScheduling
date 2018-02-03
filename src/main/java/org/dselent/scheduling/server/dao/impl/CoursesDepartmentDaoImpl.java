@@ -9,12 +9,11 @@ import java.util.Map;
 import org.dselent.scheduling.server.dao.CoursesDepartmentDao;
 import org.dselent.scheduling.server.extractor.CourseDepartmentsExtractor;
 import org.dselent.scheduling.server.miscellaneous.Pair;
-import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
-
 import org.dselent.scheduling.server.model.CourseDepartment;
 
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
+import org.dselent.scheduling.server.sqlutils.QueryStringBuilder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;

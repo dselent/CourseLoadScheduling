@@ -27,11 +27,13 @@ public class CustomDaoTest
     @Test
     public void testCustomDao() throws SQLException
     {
+    	/*
     	@SuppressWarnings("unused")
     	
 		List<User> userList = customDao.getAllUsersWithRole(1);
     	
     	// see things in debugger
     	System.out.println();
+    	*/
     }
 }
