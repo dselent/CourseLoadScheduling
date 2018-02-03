@@ -29,5 +29,5 @@ public interface CustomDao
 	public List<GetAllRequests> getAllRequests();
 	public List<Course> getCourseOneProf(int facultyId);
 	public List<Department> getDeptOneProf(int facultyId);
-	public List<User>  getProfsOneCourse(int courseSectionId)
+	public List<User>  getProfsOneCourse(int courseSectionId);
 }
