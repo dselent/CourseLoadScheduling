@@ -2,10 +2,10 @@ package org.dselent.scheduling.server.dao.impl;
 
 import org.dselent.scheduling.server.dao.Dao;
 import org.dselent.scheduling.server.miscellaneous.Pair;
-import org.dselent.scheduling.server.miscellaneous.QueryStringBuilder;
 import org.dselent.scheduling.server.model.Model;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
+import org.dselent.scheduling.server.sqlutils.QueryStringBuilder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
