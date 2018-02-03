@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
-import org.dselent.scheduling.server.dao.UsersRolesLinksDao;
+//import org.dselent.scheduling.server.dao.UsersRolesLinksDao;
 import org.dselent.scheduling.server.dto.RegisterUserDto;
 import org.dselent.scheduling.server.model.User;
-import org.dselent.scheduling.server.model.UsersRolesLink;
+//import org.dselent.scheduling.server.model.UsersRolesLink;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,8 +24,10 @@ public class UserServiceImpl implements UserService
 	@Autowired
 	private UsersDao usersDao;
 	
+	/*
 	@Autowired
 	private UsersRolesLinksDao usersRolesLinksDao;
+	*/
 	
     public UserServiceImpl()
     {
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService
      	
     	// for now, assume users can only register with default role id
     	// may change in the future
-    	
+    	/*
 		UsersRolesLink usersRolesLink = new UsersRolesLink();
 		usersRolesLink.setUserId(user.getId());
 		usersRolesLink.setRoleId(1); // hard coded as regular user
@@ -100,7 +102,7 @@ public class UserServiceImpl implements UserService
     	usersRolesLinksKeyHolderColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.DELETED));
 		
     	rowsAffectedList.add(usersRolesLinksDao.insert(usersRolesLink, usersRolesLinksInsertColumnNameList, usersRolesLinksKeyHolderColumnNameList));
-		
+		*/
 		return rowsAffectedList;
 	}
 	
