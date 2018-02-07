@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Register
 {
 	public static final RequestMethod REQUEST_TYPE = RequestMethod.POST;
+	/* change this */
 	public static final String REQUEST_NAME = "register";
 	private static final List<HeaderKey> HEADER_KEY_LIST;
 	private static final List<ParameterKey> PARAMETER_KEY_LIST;
@@ -30,7 +31,9 @@ public class Register
 	{
 
 	}
-	
+
+
+	/* change this*/
 	public static enum BodyKey
 	{
 		USER_NAME,
@@ -66,6 +69,8 @@ public class Register
 	};
 
 	// Private Constructor
+
+	/* change this */
 	private Register()
 	{
 		
