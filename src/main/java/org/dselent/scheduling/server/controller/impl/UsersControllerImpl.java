@@ -38,7 +38,7 @@ public class UsersControllerImpl implements UsersController
 	public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception 
     {
     	// Print is for testing purposes
-		System.out.println("controller reached");
+		System.out.println("Users controller reached");
     	
 		// add any objects that need to be returned to the success list
 		String response = "";

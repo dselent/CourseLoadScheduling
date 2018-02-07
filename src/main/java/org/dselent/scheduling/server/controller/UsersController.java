@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/user")
+@RequestMapping("/register")
 public interface UsersController
 {
     
     @RequestMapping(method=RequestMethod.POST, value=Register.REQUEST_NAME)
+
+    // Registers a user in the system
 	public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception;
 }
 

@@ -64,7 +64,8 @@ public class Register
 		}
 		
 	};
-	
+
+	// Private Constructor
 	private Register()
 	{
 		

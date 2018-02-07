@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
-//import org.dselent.scheduling.server.dao.UsersRolesLinksDao;
 import org.dselent.scheduling.server.dto.RegisterUserDto;
 import org.dselent.scheduling.server.model.User;
-//import org.dselent.scheduling.server.model.UsersRolesLink;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,11 +21,6 @@ public class UserServiceImpl implements UserService
 {
 	@Autowired
 	private UsersDao usersDao;
-	
-	/*
-	@Autowired
-	private UsersRolesLinksDao usersRolesLinksDao;
-	*/
 	
     public UserServiceImpl()
     {
