@@ -8,15 +8,10 @@ import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
- * Defines information for the courseSectionAdd request including the keys for the
+ * Defines information for the courseSectionModify request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
  *
  * @author dselent
