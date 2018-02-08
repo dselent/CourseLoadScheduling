@@ -36,7 +36,7 @@ public class DeleteCourse
     /* change this*/
     public static enum BodyKey
     {
-        COURSE_ID;
+        COURSE_ID
     }
 
 
