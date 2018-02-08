@@ -7,17 +7,17 @@ import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Defines information for the deleteCourse request including the keys for the
+ * Defines information for the createCourse request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
  *
  * @author dselent
  *
  */
-public class DeleteCourse
+public class CourseAdd
 {
     public static final RequestMethod REQUEST_TYPE = RequestMethod.POST;
     /* change this */
-    public static final String REQUEST_NAME = "deleteCourse";
+    public static final String REQUEST_NAME = "courseAdd";
     private static final List<HeaderKey> HEADER_KEY_LIST;
     private static final List<ParameterKey> PARAMETER_KEY_LIST;
     private static final List<BodyKey> BODY_KEY_LIST;
@@ -36,7 +36,9 @@ public class DeleteCourse
     /* change this*/
     public static enum BodyKey
     {
-        COURSE_ID
+        COURSE_NAME,
+        COURSE_DEPT,
+        COURSE_DESCRIPTION
     }
 
 
@@ -67,7 +69,7 @@ public class DeleteCourse
     // Private Constructor
 
     /* change this */
-    private DeleteCourse()
+    private CourseAdd()
     {
 
     };
