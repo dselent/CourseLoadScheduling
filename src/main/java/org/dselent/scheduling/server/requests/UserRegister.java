@@ -36,12 +36,11 @@ public class UserRegister
     /* change this*/
     public static enum BodyKey
     {
-        USER_ID,
         USER_NAME,
         FIRST_NAME,
         LAST_NAME,
         EMAIL,
-        PASSWORD;
+        PASSWORD
     }
 
 

@@ -38,7 +38,7 @@ public class UserLogin
     {
 
         USER_NAME,
-        PASSWORD;
+        PASSWORD
     }
 
 

@@ -12,14 +12,14 @@ import javax.annotation.Generated;
  */
 
 
-public class LoginUserDto
+public class UserLoginDto
 {
     private final String userName;
     private final String password;
 
     // I added to the auto-generated code
     @Generated("SparkTools")
-    private LoginUserDto(Builder builder)
+    private UserLoginDto(Builder builder)
     {
         // can add defaults if null for other places where the builder pattern is used
 
@@ -70,11 +70,11 @@ public class LoginUserDto
         {
             return false;
         }
-        if (!(obj instanceof RegisterUserDto))
+        if (!(obj instanceof UserRegisterDto))
         {
             return false;
         }
-        LoginUserDto other = (LoginUserDto) obj;
+        UserLoginDto other = (UserLoginDto) obj;
 
         if (password == null)
         {
@@ -105,7 +105,7 @@ public class LoginUserDto
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("RegisterUserDto [userName=");
+        builder.append("UserRegisterDto [userName=");
         builder.append(userName);
         builder.append(", password=");
         builder.append(password);
@@ -114,7 +114,7 @@ public class LoginUserDto
     }
 
     /**
-     * Creates builder to build {@link RegisterUserDto}.
+     * Creates builder to build {@link UserRegisterDto}.
      * @return created builder
      */
     @Generated("SparkTools")
@@ -124,7 +124,7 @@ public class LoginUserDto
     }
 
     /**
-     * Builder to build {@link RegisterUserDto}.
+     * Builder to build {@link UserRegisterDto}.
      */
     @Generated("SparkTools")
     public static final class Builder
@@ -149,9 +149,9 @@ public class LoginUserDto
             return this;
         }
 
-        public LoginUserDto build()
+        public UserLoginDto build()
         {
-            return new LoginUserDto(this);
+            return new UserLoginDto(this);
         }
     }
 }

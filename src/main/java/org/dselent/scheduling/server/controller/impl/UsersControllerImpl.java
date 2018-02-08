@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.dselent.scheduling.server.controller.UsersController;
-import org.dselent.scheduling.server.dto.RegisterUserDto;
+import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.Register;
 import org.dselent.scheduling.server.service.UserService;
@@ -50,15 +50,15 @@ public class UsersControllerImpl implements UsersController
 		String email = request.get(Register.getBodyName(Register.BodyKey.EMAIL));
 		String password = request.get(Register.getBodyName(Register.BodyKey.PASSWORD));
 
-		RegisterUserDto.Builder builder = RegisterUserDto.builder();
-		RegisterUserDto registerUserDto = builder.withUserName(userName)
+		UserRegisterDto.Builder builder = UserRegisterDto.builder();
+		UserRegisterDto userRegisterDto = builder.withUserName(userName)
 		.withFirstName(firstName)
 		.withLastName(lastName)
 		.withEmail(email)
 		.withPassword(password)
 		.build();
 		
-		userService.registerUser(registerUserDto);
+		userService.registerUser(userRegisterDto);
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK);

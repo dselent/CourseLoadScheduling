@@ -36,8 +36,7 @@ public class UserLogout
     /* change this*/
     public static enum BodyKey
     {
-
-        USER_ID;
+        USER_ID
     }
 
 

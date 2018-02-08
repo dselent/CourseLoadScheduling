@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
-import org.dselent.scheduling.server.dto.RegisterUserDto;
+import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.model.User;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,11 @@ public class UserServiceImpl implements UserService
     
     /*
      * (non-Javadoc)
-     * @see org.dselent.scheduling.server.service.UserService#registerUser(org.dselent.scheduling.server.dto.RegisterUserDto)
+     * @see org.dselent.scheduling.server.service.UserService#registerUser(org.dselent.scheduling.server.dto.UserRegisterDto)
      */
     @Transactional
     @Override
-	public List<Integer> registerUser(RegisterUserDto dto) throws SQLException
+	public List<Integer> registerUser(UserRegisterDto dto) throws SQLException
 	{
 		List<Integer> rowsAffectedList = new ArrayList<>();
 		
