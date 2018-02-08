@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines information for the courseSectionTimeAdd request including the keys for the
+ * Defines information for the facultyUnrequestCourse request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
  *
  * @author dselent

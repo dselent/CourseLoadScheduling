@@ -5,14 +5,13 @@ package org.dselent.scheduling.server.requests;
  */
 
 import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
-import org.dselent.scheduling.server.model.Term;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines information for the courseSectionTimeAdd request including the keys for the
+ * Defines information for the termRemove request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
  *
  * @author dselent

@@ -47,7 +47,7 @@ public class GetSchedules {
     };
 
     // Private Constructor
-    private GetSchedules{
+    private GetSchedules(){
 
     }
 

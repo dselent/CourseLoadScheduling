@@ -10,15 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
- * Defines information for the courseSectionTimeAdd request including the keys for the
+ * Defines information for the courseSectionTimeRemove request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
  *
  * @author dselent
@@ -28,7 +21,7 @@ public class CourseSectionTimeRemove
 {
     public static final RequestMethod REQUEST_TYPE = RequestMethod.POST;
     /* change this */
-    public static final String REQUEST_NAME = "courseSectionTimeRemove";
+    public static final String REQUEST_NAME = "courseSectionTime";
     private static final List<HeaderKey> HEADER_KEY_LIST;
     private static final List<ParameterKey> PARAMETER_KEY_LIST;
     private static final List<BodyKey> BODY_KEY_LIST;
