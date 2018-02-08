@@ -71,7 +71,7 @@ public class AdminChangeUserRoleDto
         {
             return false;
         }
-        UserRegisterDto other = (UserRegisterDto) obj;
+        AdminChangeUserRoleDto other = (AdminChangeUserRoleDto) obj;
         if (userId == null)
         {
             if (other.userId != null)
@@ -124,45 +124,26 @@ public class AdminChangeUserRoleDto
     @Generated("SparkTools")
     public static final class Builder
     {
-        private String userName;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private String password;
+        private Integer userId;
+        private String role;
 
         private Builder()
         {
         }
 
-        public Builder withUserName(String userName)
+        public Builder withUserId(Integer userId)
         {
-            this.userName = userName;
+            this.userId = userId;
             return this;
         }
 
-        public Builder withFirstName(String firstName)
+        public Builder withRole(String role)
         {
-            this.firstName = firstName;
+            this.role = role;
             return this;
         }
 
-        public Builder withLastName(String lastName)
-        {
-            this.lastName = lastName;
-            return this;
-        }
 
-        public Builder withEmail(String email)
-        {
-            this.email = email;
-            return this;
-        }
-
-        public Builder withPassword(String password)
-        {
-            this.password = password;
-            return this;
-        }
 
         public AdminChangeUserRoleDto build()
         {
