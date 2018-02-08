@@ -21,7 +21,7 @@ public class CourseAddDto {
     private final String courseDescription;
     // I added to the auto-generated code
     @Generated("SparkTools")
-    private UserRegisterDto(Builder builder)
+    private CourseAddDto(Builder builder)
     {
         // can add defaults if null for other places where the builder pattern is used
 
@@ -106,37 +106,66 @@ public class CourseAddDto {
         }
         if (courseDescription == null)
         {
-            if (other.lastName != null)
+            if (other.courseDescription != null)
             {
                 return false;
             }
-        }
-        else if (!lastName.equals(other.lastName))
-        {
-            return false;
-        }
-        if (password == null)
-        {
-            if (other.password != null)
-            {
-                return false;
-            }
-        }
-        else if (!password.equals(other.password))
-        {
-            return false;
-        }
-        if (userName == null)
-        {
-            if (other.userName != null)
-            {
-                return false;
-            }
-        }
-        else if (!userName.equals(other.userName))
-        {
-            return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseAddDto{" +
+                "courseName='" + courseName + '\'' +
+                ", courseDept='" + courseDept + '\'' +
+                ", courseDescription='" + courseDescription + '\'' +
+                '}';
+    }
+    /**
+     * Creates builder to build {@link UserRegisterDto}.
+     * @return created builder
+     */
+    @Generated("SparkTools")
+    public static Builder builder()
+    {
+        return new Builder();
+    }
+
+    /**
+     * Builder to build {@link UserRegisterDto}.
+     */
+    @Generated("SparkTools")
+    public static final class Builder
+    {
+        private String courseName;
+        private String courseDept;
+        private String courseDescription;
+
+        private Builder()
+        {
+        }
+
+        public Builder withCourseName(String courseName)
+        {
+            this.courseName = courseName;
+            return this;
+        }
+
+        public Builder withCourseDept(String courseDept)
+        {
+            this.courseDept = courseDept;
+            return this;
+        }
+
+        public Builder withCourseDescription(String courseDescription)
+        {
+            this.courseDescription = courseDescription;
+            return this;
+        }
+        public CourseAddDto build()
+        {
+            return new CourseAddDto(this);
+        }
     }
 }
