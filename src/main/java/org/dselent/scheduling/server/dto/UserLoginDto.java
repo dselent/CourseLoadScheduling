@@ -1,6 +1,7 @@
 package org.dselent.scheduling.server.dto;
 
 import javax.annotation.Generated;
+import java.util.Objects;
 
 /**
  * DTO = Data Transfer Object
@@ -49,14 +50,11 @@ public class UserLoginDto
         return password;
     }
 
+
     @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-        return result;
+    public int hashCode() {
+
+        return Objects.hash(userName, password);
     }
 
     @Override
