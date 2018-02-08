@@ -7,7 +7,7 @@ import java.util.Map;
 import org.dselent.scheduling.server.controller.UsersController;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
-import org.dselent.scheduling.server.requests.Register;
+import org.dselent.scheduling.server.requests.UserRegister;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,11 +44,11 @@ public class UsersControllerImpl implements UsersController
 		String response = "";
 		List<Object> success = new ArrayList<Object>();
 		
-		String userName = request.get(Register.getBodyName(Register.BodyKey.USER_NAME));
-		String firstName = request.get(Register.getBodyName(Register.BodyKey.FIRST_NAME));
-		String lastName = request.get(Register.getBodyName(Register.BodyKey.LAST_NAME));
-		String email = request.get(Register.getBodyName(Register.BodyKey.EMAIL));
-		String password = request.get(Register.getBodyName(Register.BodyKey.PASSWORD));
+		String userName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.USER_NAME));
+		String firstName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.FIRST_NAME));
+		String lastName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.LAST_NAME));
+		String email = request.get(UserRegister.getBodyName(UserRegister.BodyKey.EMAIL));
+		String password = request.get(UserRegister.getBodyName(UserRegister.BodyKey.PASSWORD));
 
 		UserRegisterDto.Builder builder = UserRegisterDto.builder();
 		UserRegisterDto userRegisterDto = builder.withUserName(userName)
