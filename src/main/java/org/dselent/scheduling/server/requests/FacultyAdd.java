@@ -10,13 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dselent.scheduling.server.miscellaneous.RequestParameterConverter;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
  * Defines information for the courseSectionTimeAdd request including the keys for the
  * header, parameters, and body and the request type (RequestMethod).
@@ -24,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author dselent
  *
  */
-public class CourseSectionTimeModify
+public class FacultyAdd
 {
     public static final RequestMethod REQUEST_TYPE = RequestMethod.POST;
     /* change this */
-    public static final String REQUEST_NAME = "courseSectionTimeModify";
+    public static final String REQUEST_NAME = "facultyAdd";
     private static final List<HeaderKey> HEADER_KEY_LIST;
     private static final List<ParameterKey> PARAMETER_KEY_LIST;
     private static final List<BodyKey> BODY_KEY_LIST;
@@ -47,12 +40,8 @@ public class CourseSectionTimeModify
     /* change this*/
     public static enum BodyKey
     {
-        COURSE_SECTION_TIME_ID,
-        COURSE_SECTION_ID,
-        DAY_OF_WEEK,
-        START_TIME,
-        END_TIME,
-        LOCATION
+        USER_ID,
+        REQUIRED_CREDITS
     }
 
 
@@ -83,7 +72,7 @@ public class CourseSectionTimeModify
     // Private Constructor
 
     /* change this */
-    private CourseSectionTimeModify()
+    private FacultyAdd()
     {
 
     };

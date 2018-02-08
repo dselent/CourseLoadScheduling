@@ -28,7 +28,7 @@ public class CourseSectionTimeRemove
 {
     public static final RequestMethod REQUEST_TYPE = RequestMethod.POST;
     /* change this */
-    public static final String REQUEST_NAME = "courseSectionTimeAdd";
+    public static final String REQUEST_NAME = "courseSectionTimeRemove";
     private static final List<HeaderKey> HEADER_KEY_LIST;
     private static final List<ParameterKey> PARAMETER_KEY_LIST;
     private static final List<BodyKey> BODY_KEY_LIST;
