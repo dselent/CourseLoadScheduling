@@ -70,7 +70,12 @@ public class UserDeactivateDto
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserDeactivateDto{" +
+                "userId='" + userId + '\'' +
+                '}';
+    }
 
     /**
      * Creates builder to build {@link UserRegisterDto}.
@@ -94,18 +99,12 @@ public class UserDeactivateDto
         {
         }
 
-        public Builder withUserName(String userId)
+        public Builder withUserId(String userId)
         {
             this.userId = userId;
             return this;
         }
 
-        @Override
-        public String toString() {
-            return "Builder[" +
-                    "userId='" + userId + '\'' +
-                    ']';
-        }
 
         public UserDeactivateDto build()
         {
