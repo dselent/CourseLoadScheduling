@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TermService
 {
-    public List<Integer> addTerm(TermAddDto termAddDto);
-    public List<Integer> modifyTerm(TermModifyDto termModifyDto);
-    public List<Integer> removeTerm(TermRemoveDto termRemoveDto);
+    public List<Integer> addTerm(TermAddDto termAddDto) throws SQLException;
+    public List<Integer> modifyTerm(TermModifyDto termModifyDto) throws  SQLException;
+    public List<Integer> removeTerm(TermRemoveDto termRemoveDto) throws SQLException;
 }
