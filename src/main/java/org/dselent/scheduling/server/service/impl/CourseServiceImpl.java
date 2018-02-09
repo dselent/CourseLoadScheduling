@@ -51,8 +51,9 @@ public class CourseServiceImpl implements CourseService{
         course.setCourseName(dto.getCourseName());
         course.setCourseDescription(dto.getCourseName());
 
-        /*dunno what to do with this. we'll probably need to add a new thing in BaseDaoImpl*/
-        String courseDept = dto.getCourseDept();
+        /*dunno what to do with this. we'll probably need to add a new thing in BaseDaoImpl
+        * --Has been modified so that courses don't necessarily require a department*/
+        //String courseDept = dto.getCourseDept();
 
         List<String> courseInsertColumnNameList = new ArrayList<>();
         List<String> courseKeyHolderColumnNameList = new ArrayList<>();
@@ -79,8 +80,9 @@ public class CourseServiceImpl implements CourseService{
         String courseName = dto.getCourseName();
         String courseDescription = dto.getCourseDescription();
 
-        /*I have no idea how to modify a course's department. the system'll work okay without it though*/
-        String courseDept = dto.getCourseDept();
+        /*I have no idea how to modify a course's department. the system'll work okay without it though
+        * --Has been modified so that courses don't necessarily require a department*/
+        //String courseDept = dto.getCourseDept();
 
 
         queryTermList.add(new QueryTerm(Course.getColumnName(Course.Columns.ID),EQUAL,courseId,null));
