@@ -130,8 +130,8 @@ public class FacultyServiceImpl implements FacultyService {
         List<Integer> rowsAffectedList = new ArrayList<>();
         List<QueryTerm> queryTermList = new ArrayList<>();
 
-        Integer facultyId = dto.getFacultyId();
-        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,facultyId,null));
+        Integer courseSectionId = dto.getCourseSectionId();
+        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,courseSectionId,null));
 
         rowsAffectedList.add(FacultyDao.delete(queryTermList));
 
