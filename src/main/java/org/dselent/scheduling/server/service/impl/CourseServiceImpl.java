@@ -10,7 +10,6 @@ import org.dselent.scheduling.server.dto.CourseModifyDto;
 import org.dselent.scheduling.server.dto.CourseRemoveDto;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.Course;
-import org.dselent.scheduling.server.requests.CourseModify;
 import org.dselent.scheduling.server.service.CourseService;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
@@ -79,6 +78,20 @@ public class CourseServiceImpl implements CourseService{
 
         rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_NAME),courseName,queryTermList));
         rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_DESCRIPTION),courseDescription,queryTermList));
+
+        return rowsAffectedList;
+    }
+
+    @Transactional
+    @Override
+    public List<Integer> removeCourse(CourseRemoveDto dto) throws SQLException{
+        List<Integer> rowsAffectedList = new ArrayList<>();
+        List<QueryTerm> queryTermList = new ArrayList<>();
+
+        Integer courseId = dto.getCourseId();
+        queryTermList.add(new QueryTerm(Course.getColumnName(Course.Columns.ID),EQUAL,courseId,null));
+
+        rowsAffectedList.add(coursesDao.delete(queryTermList));
 
         return rowsAffectedList;
     }

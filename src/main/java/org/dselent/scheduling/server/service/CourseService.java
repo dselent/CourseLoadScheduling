@@ -26,5 +26,5 @@ public interface CourseService {
 
     public List<Integer> addCourse(CourseAddDto courseAddDto) throws  SQLException;
     public List<Integer> modifyCourse(CourseModifyDto courseModifyDto) throws SQLException;
-    public Course removeCourse(CourseRemoveDto courseRemoveDto) throws  SQLException;
+    public List<Integer> removeCourse(CourseRemoveDto courseRemoveDto) throws  SQLException;
 }
