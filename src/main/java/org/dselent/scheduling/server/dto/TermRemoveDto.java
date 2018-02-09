@@ -16,9 +16,6 @@ public class TermRemoveDto
     private final Integer TermId;
 
 
-
-
-
     // I added to the auto-generated code
     @Generated("SparkTools")
     private TermRemoveDto(Builder builder)
@@ -27,10 +24,6 @@ public class TermRemoveDto
 
         this.TermId = builder.TermId;
 
-
-
-
-
         // making claim that none of these can be null
         // add other state checks here as necessary
 
@@ -38,8 +31,6 @@ public class TermRemoveDto
         {
             throw new IllegalStateException("TermId cannot be null");
         }
-
-
     }
 
     public Integer getTermId()
@@ -99,8 +90,6 @@ public class TermRemoveDto
             this.TermId = TermId;
             return this;
         }
-
-
 
         public TermRemoveDto build()
         {
