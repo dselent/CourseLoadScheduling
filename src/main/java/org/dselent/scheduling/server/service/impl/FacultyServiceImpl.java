@@ -42,7 +42,7 @@ public class FacultyServiceImpl implements FacultyService {
         faculty.setUsersId(dto.getUserId());
         faculty.setRequiredCredits(dto.getRequiredCredits());
 
-        /*dunno what to do with this. we'll probably need to add a new thing in BaseDaoImpl*/
+
 
         List<String> facultyInsertColumnNameList = new ArrayList<>();
         List<String> facultyKeyHolderColumnNameList = new ArrayList<>();

@@ -117,7 +117,7 @@ public class CourseSectionServiceImpl implements CourseSectionService{
         courseSectionTermKeyHolderColumnNameList.add(CourseSectionTerm.getColumnName(CourseSectionTerm.Columns.CREATED_AT));
         courseSectionTermKeyHolderColumnNameList.add(CourseSectionTerm.getColumnName(CourseSectionTerm.Columns.UPDATED_AT));
 
-        rowsAffectedList.add(courseSectionsTermsDao.insert(courseSectionTerm,courseSectionInsertColumnNameList,courseSectionKeyHolderColumnNameList));
+        rowsAffectedList.add(courseSectionsTermsDao.insert(courseSectionTerm,courseSectionTermInsertColumnNameList,courseSectionTermKeyHolderColumnNameList));
 
         return rowsAffectedList;
     }
