@@ -111,6 +111,10 @@ public class CourseAddDto {
                 return false;
             }
         }
+        else if (!courseDescription.equals(other.courseDescription))
+        {
+            return false;
+        }
         return true;
     }
 
