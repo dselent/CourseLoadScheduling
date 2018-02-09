@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.dselent.scheduling.server.controller.UsersController;
+import org.dselent.scheduling.server.controller.UsersRegister;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.UserRegister;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author dselent
  */
 @Controller
-public class UsersControllerImpl implements UsersController
+public class UsersRegisterImpl implements UsersRegister
 {
 	@Autowired
     private UserService userService;
