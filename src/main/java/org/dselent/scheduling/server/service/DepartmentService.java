@@ -10,4 +10,7 @@ import java.util.List;
 
 @Service
 public interface DepartmentService {
-  
+    public List<Integer> addDepartment(DepartmentAddDto DepartmentAddDto) throws SQLException;
+    public List<Integer> modifyDepartment(DepartmentModifyDto DepartmentModifyDto) throws SQLException;
+    public List<Integer> removeDepartment(DepartmentRemoveDto DepartmentRemoveDto) throws SQLException;
+}
