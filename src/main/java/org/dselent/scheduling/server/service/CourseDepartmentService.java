@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * Created by Nathan on 2/9/2018.
  */
 @Service
-public interface CourseDepartmentServiceImpl {
-    public List<Integer> addCourseDepartment(CourseDepartmentAddDto dto);
-    public List<Integer> modifyCourseDepartment(CourseDepartmentModifyDto dto);
-    public List<Integer> removeCourseDepartment(CourseDepartmentRemoveDto dto);
+public interface CourseDepartmentService {
+    public List<Integer> addCourseDepartment(CourseDepartmentAddDto dto) throws SQLException;
+    public List<Integer> modifyCourseDepartment(CourseDepartmentModifyDto dto) throws SQLException;
+    public List<Integer> removeCourseDepartment(CourseDepartmentRemoveDto dto) throws SQLException;
 
 }
