@@ -8,15 +8,11 @@ import org.dselent.scheduling.server.dao.CoursesDao;
 import org.dselent.scheduling.server.dto.CourseAddDto;
 import org.dselent.scheduling.server.dto.CourseModifyDto;
 import org.dselent.scheduling.server.dto.CourseRemoveDto;
-import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.Course;
 import org.dselent.scheduling.server.service.CourseService;
-import org.dselent.scheduling.server.sqlutils.ColumnOrder;
+
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.keygen.KeyGenerators;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +41,9 @@ public class CourseServiceImpl implements CourseService{
         Course course = new Course();
         course.setCourseName(dto.getCourseName());
         course.setCourseDescription(dto.getCourseName());
+
+        /*dunno what to do with this. we'll probably need to add a new thing in BaseDaoImpl*/
+        String courseDept = dto.getCourseDept();
 
         List<String> courseInsertColumnNameList = new ArrayList<>();
         List<String> courseKeyHolderColumnNameList = new ArrayList<>();
