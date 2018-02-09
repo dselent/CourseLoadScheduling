@@ -82,6 +82,15 @@ public class FacultyModifyDto
         return Objects.hash(UserId, FacultyId, RequiredCredits);
     }
 
+    @Override
+    public String toString() {
+        return "FacultyModifyDto{" +
+                "UserId=" + UserId +
+                ", FacultyId=" + FacultyId +
+                ", RequiredCredits=" + RequiredCredits +
+                '}';
+    }
+
     /**
      * Creates builder to build {@link FacultyModifyDto}.
      * @return created builder
