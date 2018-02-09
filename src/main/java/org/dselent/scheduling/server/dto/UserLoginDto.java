@@ -58,57 +58,20 @@ public class UserLoginDto
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (!(obj instanceof UserRegisterDto))
-        {
-            return false;
-        }
-        UserLoginDto other = (UserLoginDto) obj;
-
-        if (password == null)
-        {
-            if (other.password != null)
-            {
-                return false;
-            }
-        }
-        else if (!password.equals(other.password))
-        {
-            return false;
-        }
-        if (userName == null)
-        {
-            if (other.userName != null)
-            {
-                return false;
-            }
-        }
-        else if (!userName.equals(other.userName))
-        {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserLoginDto that = (UserLoginDto) o;
+        return Objects.equals(userName, that.userName) &&
+                Objects.equals(password, that.password);
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.append("UserRegisterDto [userName=");
-        builder.append(userName);
-        builder.append(", password=");
-        builder.append(password);
-        builder.append("]");
-        return builder.toString();
+    public String toString() {
+        return "UserLoginDto{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     /**
