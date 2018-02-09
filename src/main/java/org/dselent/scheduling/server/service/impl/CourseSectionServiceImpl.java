@@ -131,13 +131,33 @@ public class CourseSectionServiceImpl implements CourseSectionService{
         String courseSectionType = dto.getSectionType();
 
         /*I have no idea how to modify a course section's term. */
-        String courseTerm = dto.getTerm();
+        String termName = dto.getTerm();
 
         queryTermList.add(new QueryTerm(CourseSection.getColumnName(CourseSection.Columns.ID),EQUAL,courseSectionId,null));
 
-        rowsAffectedList.add(courseSectionsDao.update(CourseSection.getColumnName((CourseSection.Columns.COURSES_ID)),courseId,queryTermList));
-        rowsAffectedList.add(courseSectionsDao.update(CourseSection.getColumnName((CourseSection.Columns.SECTION_TYPE)),courseSectionType,queryTermList));
+        rowsAffectedList.add(courseSectionsDao.update(CourseSection.getColumnName(CourseSection.Columns.COURSES_ID),courseId,queryTermList));
+        rowsAffectedList.add(courseSectionsDao.update(CourseSection.getColumnName(CourseSection.Columns.SECTION_TYPE),courseSectionType,queryTermList));
 
+        //select TermId
+        List<String> termIdEntry = new ArrayList<>();
+        List<QueryTerm> termQueryTermList = new ArrayList<>();
+
+        termIdEntry.add(Term.getColumnName(Term.Columns.ID));
+
+        termQueryTermList.add(new QueryTerm(Term.getColumnName(Term.Columns.TERM_NAME),EQUAL,termName,null));
+
+        List<Term> termsList = termsDao.select(termIdEntry,termQueryTermList,null);
+
+        if(termsList.isEmpty()){
+            return null;
+        }
+
+        Integer termId = termsList.get(0).getId();
+
+        List<QueryTerm> sectionsTermsQueryTermList = new ArrayList<>();
+        sectionsTermsQueryTermList.add(new QueryTerm(CourseSectionTerm.getColumnName(CourseSectionTerm.Columns.COURSE_SECTIONS_ID),EQUAL,courseSectionId,null));
+
+        rowsAffectedList.add(courseSectionsTermsDao.update(CourseSectionTerm.getColumnName(CourseSectionTerm.Columns.TERMS_ID),termId,sectionsTermsQueryTermList));
         return rowsAffectedList;
 
     }
