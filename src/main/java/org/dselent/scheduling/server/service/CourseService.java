@@ -25,6 +25,6 @@ import org.springframework.stereotype.Service;
 public interface CourseService {
 
     public List<Integer> addCourse(CourseAddDto courseAddDto) throws  SQLException;
-    public Course modifyCourse(CourseModifyDto courseModifyDto) throws SQLException;
+    public List<Integer> modifyCourse(CourseModifyDto courseModifyDto) throws SQLException;
     public Course removeCourse(CourseRemoveDto courseRemoveDto) throws  SQLException;
 }

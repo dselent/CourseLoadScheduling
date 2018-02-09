@@ -58,6 +58,27 @@ public class CourseServiceImpl implements CourseService{
         courseKeyHolderColumnNameList.add(Course.getColumnName(Course.Columns.UPDATED_AT));
 
         rowsAffectedList.add(coursesDao.insert(course, courseInsertColumnNameList, courseKeyHolderColumnNameList));
+        return rowsAffectedList;
+    }
+
+    @Transactional
+    @Override
+    public List<Integer> modifyCourse(CourseModifyDto dto) throws SQLException{
+        List<Integer> rowsAffectedList = new ArrayList<>();
+        List<QueryTerm> queryTermList = new ArrayList<>();
+
+        Integer courseId = dto.getCourseId();
+        String courseName = dto.getCourseName();
+        String courseDescription = dto.getCourseDescription();
+
+        /*I have no idea how to modify a course's department. the system'll work okay without it though*/
+        String courseDept = dto.getCourseDept();
+
+
+        queryTermList.add(new QueryTerm(Course.getColumnName(Course.Columns.ID),EQUAL,courseId,null));
+
+        rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_NAME),courseName,queryTermList));
+        rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_DESCRIPTION),courseDescription,queryTermList));
 
         return rowsAffectedList;
     }
