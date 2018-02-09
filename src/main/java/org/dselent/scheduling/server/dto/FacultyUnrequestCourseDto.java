@@ -100,7 +100,6 @@ public class FacultyUnrequestCourseDto
             return this;
         }
 
-       
 
 
         public FacultyUnrequestCourseDto build()
