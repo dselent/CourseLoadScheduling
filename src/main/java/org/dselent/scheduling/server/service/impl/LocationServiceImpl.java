@@ -39,7 +39,6 @@ public class LocationServiceImpl implements LocationService{
         location.setRoom(dto.getRoom());
         location.setRoomSize(dto.getRoomSize());
 
-        List<String> locationInsertColumnnNameList = new ArrayList<>();
         List<String> locationKeyHolderColumnNameList = new ArrayList<>();
 
         List<String> locationInsertColumnNameList = new ArrayList<>();
@@ -54,21 +53,6 @@ public class LocationServiceImpl implements LocationService{
         locationKeyHolderColumnNameList.add(Location.getColumnName(Location.Columns.UPDATED_AT));
 
         rowAffectedList.add(locationsDao.insert(location, locationInsertColumnNameList, locationKeyHolderColumnNameList));
-
-//        List<String> locationIDEntry = new ArrayList<>();
-//        List<QueryTerm> locationqueryTerms = new ArrayList<>();
-//
-//        locationIDEntry.add(Location.getColumnName(Location.Columns.ID));
-//
-//        locationqueryTerms.add(new QueryTerm(Location.getColumnName(Location.Columns.ID),EQUAL,location.getId(), LogicalOperator.AND));
-//        locationqueryTerms.add(new QueryTerm(Location.getColumnName(Location.Columns.ROOM),EQUAL,location.getRoom(),LogicalOperator.AND));
-//        locationqueryTerms.add(new QueryTerm(Location.getColumnName(Location.Columns.BUILDING),EQUAL, location.getBuilding(),LogicalOperator.AND));
-//
-//        List<Location> locationList = locationsDao.select(locationIDEntry, locationqueryTerms,null);
-//
-//        if (locationList.isEmpty()){
-//            return null;
-//        }
 
         return rowAffectedList;
     }
@@ -86,7 +70,7 @@ public class LocationServiceImpl implements LocationService{
 
         queryTermList.add(new QueryTerm(Location.getColumnName(Location.Columns.ID),EQUAL,locationId,null));
 
-        rowAffectedList.add(locationsDao.update(Location.getColumnName((Location.Columns.BUILDING)),locationId,queryTermList));
+        rowAffectedList.add(locationsDao.update(Location.getColumnName((Location.Columns.BUILDING)),locationBuilding,queryTermList));
         rowAffectedList.add(locationsDao.update(Location.getColumnName((Location.Columns.ROOM)),locationRoom,queryTermList));
         rowAffectedList.add(locationsDao.update(Location.getColumnName((Location.Columns.ROOM_SIZE)),locationRoomSize,queryTermList));
 
