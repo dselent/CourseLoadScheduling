@@ -50,7 +50,7 @@ public class CourseSectionServiceImpl implements CourseSectionService{
         CourseSection courseSection = new CourseSection();
         courseSection.setCoursesId(dto.getCourseId());
         courseSection.setSectionType(dto.getSectionType());
-        
+
         String termName = dto.getTerm();
 
         List<String> courseSectionInsertColumnNameList = new ArrayList<>();
