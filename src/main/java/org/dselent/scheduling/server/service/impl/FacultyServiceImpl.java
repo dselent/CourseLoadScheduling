@@ -98,43 +98,4 @@ public class FacultyServiceImpl implements FacultyService {
 
         return rowsAffectedList;
     }
-    /* requesting course */
-    @Transactional
-    @Override
-    public List<Integer> requestFaculty (FacultyRequestCourseDto dto) throws SQLException{
-        List<Integer> rowsAffectedList = new ArrayList<>();
-        List<QueryTerm> queryTermList = new ArrayList<>();
-
-        CourseRequest courseRequest = new CourseRequest();
-        courseRequest.setCourseSectionsId(dto.getCourseSectionId());
-        courseRequest.setFacultyId(dto.getFacultyId());
-
-
-
-        List<String> facultyInsertColumnNameList = new ArrayList<>();
-        List<String> facultyKeyHolderColumnNameList = new ArrayList<>();
-
-        facultyInsertColumnNameList.add(CourseRequest.getColumnName(CourseRequest.Columns.FACULTY_ID));
-        facultyInsertColumnNameList.add(CourseRequest.getColumnName(CourseRequest.Columns.COURSE_SECTIONS_ID));
-        facultyKeyHolderColumnNameList.add(CourseRequest.getColumnName(CourseRequest.Columns.ID));
-        facultyKeyHolderColumnNameList.add(CourseRequest.getColumnName(CourseRequest.Columns.CREATED_AT));
-        facultyKeyHolderColumnNameList.add(CourseRequest.getColumnName(CourseRequest.Columns.UPDATED_AT));
-
-        rowsAffectedList.add(CourseRequestsDao.insert(courseRequest, facultyInsertColumnNameList, facultyKeyHolderColumnNameList));
-        return rowsAffectedList;
-    }
-    /* unrequesting course */
-    @Transactional
-    @Override
-    public List<Integer> unrequestFaculty (FacultyUnrequestCourseDto dto) throws SQLException{
-        List<Integer> rowsAffectedList = new ArrayList<>();
-        List<QueryTerm> queryTermList = new ArrayList<>();
-
-        Integer courseSectionId = dto.getCourseSectionId();
-        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,courseSectionId,null));
-
-        rowsAffectedList.add(FacultyDao.delete(queryTermList));
-
-        return rowsAffectedList;
-    }
 }

@@ -28,7 +28,5 @@ public interface FacultyService {
     public List<Integer> addFaculty(FacultyAddDto dto) throws  SQLException;
     public List<Integer> modifyFaculty(FacultyModifyDto dto) throws SQLException;
     public List<Integer> removeFaculty(FacultyRemoveDto dto) throws  SQLException;
-    public List<Integer> requestFaculty(FacultyRequestCourseDto dto) throws  SQLException;
-    public List<Integer> unrequestFaculty(FacultyUnrequestCourseDto dto) throws  SQLException;
 }
 
