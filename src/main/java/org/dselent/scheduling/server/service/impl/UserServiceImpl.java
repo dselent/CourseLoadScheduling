@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
+import org.dselent.scheduling.server.dto.UserLoginDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.User;
@@ -85,8 +86,11 @@ public class UserServiceImpl implements UserService
 	//
 
 	@Override
-	public User loginUser(String userName, String password) throws SQLException
+	public User loginUser(UserLoginDto userLoginDto) throws SQLException
 	{
+		// Get data out of the DTO
+		String userName = userLoginDto.getUserName();
+		String password = userLoginDto.getPassword();
 
 		List<String> userSelectColumnNameList = new ArrayList<>();
 		List<QueryTerm> queryTermList = new ArrayList<>();
@@ -118,7 +122,7 @@ public class UserServiceImpl implements UserService
 		PasswordEncoder passwordEncorder = new BCryptPasswordEncoder();
 		String encryptedPassword = passwordEncorder.encode(saltedPassword);
 
-		if(encryptedPassword == targetUser.getEncryptedPassword()){
+		if(encryptedPassword.equals(targetUser.getEncryptedPassword())){
 			return targetUser;
 		} else {
 			return null; // Or maybe throw a UserNotFound Exception?
