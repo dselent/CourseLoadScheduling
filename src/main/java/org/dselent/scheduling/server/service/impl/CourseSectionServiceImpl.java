@@ -32,7 +32,9 @@ import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 public class CourseSectionServiceImpl implements CourseSectionService{
     @Autowired
     private CourseSectionsDao courseSectionsDao;
+    @Autowired
     private TermsDao termsDao;
+    @Autowired
     private CourseSectionsTermsDao courseSectionsTermsDao;
 
     public CourseSectionServiceImpl(){
@@ -65,7 +67,7 @@ public class CourseSectionServiceImpl implements CourseSectionService{
 
         rowsAffectedList.add(courseSectionsDao.insert(courseSection, courseSectionInsertColumnNameList, courseSectionKeyHolderColumnNameList));
 
-        //adding the link to the course's term
+        //adding the link to the course section's term
 
         //select CourseSectionId
         List<String> courseSectionIdEntry = new ArrayList<>();
@@ -130,7 +132,6 @@ public class CourseSectionServiceImpl implements CourseSectionService{
         Integer courseId = dto.getCourseId();
         String courseSectionType = dto.getSectionType();
 
-        /*I have no idea how to modify a course section's term. */
         String termName = dto.getTerm();
 
         queryTermList.add(new QueryTerm(CourseSection.getColumnName(CourseSection.Columns.ID),EQUAL,courseSectionId,null));

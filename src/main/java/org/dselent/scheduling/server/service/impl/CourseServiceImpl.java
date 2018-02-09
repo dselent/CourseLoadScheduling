@@ -5,12 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.CoursesDao;
+import org.dselent.scheduling.server.dao.CoursesDepartmentDao;
+import org.dselent.scheduling.server.dao.DepartmentsDao;
 import org.dselent.scheduling.server.dto.CourseAddDto;
 import org.dselent.scheduling.server.dto.CourseModifyDto;
 import org.dselent.scheduling.server.dto.CourseRemoveDto;
 import org.dselent.scheduling.server.model.Course;
+import org.dselent.scheduling.server.model.CourseDepartment;
+import org.dselent.scheduling.server.model.Department;
 import org.dselent.scheduling.server.service.CourseService;
 
+import org.dselent.scheduling.server.sqlutils.LogicalOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +29,10 @@ import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 public class CourseServiceImpl implements CourseService{
     @Autowired
     private CoursesDao coursesDao;
+    @Autowired
+    private DepartmentsDao departmentsDao;
+    @Autowired
+    private CoursesDepartmentDao coursesDepartmentDao;
 
     public CourseServiceImpl(){
 
@@ -56,6 +65,7 @@ public class CourseServiceImpl implements CourseService{
         courseKeyHolderColumnNameList.add(Course.getColumnName(Course.Columns.UPDATED_AT));
 
         rowsAffectedList.add(coursesDao.insert(course, courseInsertColumnNameList, courseKeyHolderColumnNameList));
+
         return rowsAffectedList;
     }
 
