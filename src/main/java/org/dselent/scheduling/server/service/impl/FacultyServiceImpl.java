@@ -8,7 +8,10 @@ import org.dselent.scheduling.server.dao.FacultyDao;
 import org.dselent.scheduling.server.dto.FacultyAddDto;
 import org.dselent.scheduling.server.dto.FacultyModifyDto;
 import org.dselent.scheduling.server.dto.FacultyRemoveDto;
+import org.dselent.scheduling.server.dto.FacultyRequestCourseDto;
+import org.dselent.scheduling.server.dto.FacultyUnrequestCourseDto;
 import org.dselent.scheduling.server.model.Faculty;
+import org.dselent.scheduling.server.requests.FacultyRequestCourse;
 import org.dselent.scheduling.server.service.FacultyService;
 
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
@@ -59,36 +62,75 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Transactional
     @Override
-    public List<Integer> modifyCourse(FacultyModifyDto dto) throws SQLException{
+    public List<Integer> modifyFaculty (FacultyModifyDto dto) throws SQLException{
         List<Integer> rowsAffectedList = new ArrayList<>();
         List<QueryTerm> queryTermList = new ArrayList<>();
 
-        Integer courseId = dto.getCourseId();
-        String courseName = dto.getCourseName();
-        String courseDescription = dto.getCourseDescription();
+        Integer userId = dto.getUserId();
+        Integer requiredCredits = dto.getRequiredCredits();
+
 
         /*I have no idea how to modify a course's department. the system'll work okay without it though*/
-        String courseDept = dto.getCourseDept();
 
 
-        queryTermList.add(new QueryTerm(Course.getColumnName(Course.Columns.ID),EQUAL,courseId,null));
 
-        rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_NAME),courseName,queryTermList));
-        rowsAffectedList.add(coursesDao.update(Course.getColumnName(Course.Columns.COURSE_DESCRIPTION),courseDescription,queryTermList));
+        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,userId,null));
+
+        rowsAffectedList.add(FacultyDao.update(Faculty.getColumnName(Faculty.Columns.USERS_ID),userId,queryTermList));
+        rowsAffectedList.add(FacultyDao.update(Faculty.getColumnName(Faculty.Columns.REQUIRED_CREDITS),requiredCredits,queryTermList));
 
         return rowsAffectedList;
     }
 
     @Transactional
     @Override
-    public List<Integer> removeCourse(CourseRemoveDto dto) throws SQLException{
+    public List<Integer> removeFaculty (FacultyRemoveDto dto) throws SQLException{
         List<Integer> rowsAffectedList = new ArrayList<>();
         List<QueryTerm> queryTermList = new ArrayList<>();
 
-        Integer courseId = dto.getCourseId();
-        queryTermList.add(new QueryTerm(Course.getColumnName(Course.Columns.ID),EQUAL,courseId,null));
+        Integer userId = dto.getFacultyId();
+        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,userId,null));
 
-        rowsAffectedList.add(coursesDao.delete(queryTermList));
+        rowsAffectedList.add(FacultyDao.delete(queryTermList));
+
+        return rowsAffectedList;
+    }
+
+    @Transactional
+    @Override
+    public List<Integer> requestFaculty (FacultyRequestCourseDto dto) throws SQLException{
+        List<Integer> rowsAffectedList = new ArrayList<>();
+        List<QueryTerm> queryTermList = new ArrayList<>();
+
+        Faculty faculty = new Faculty();
+        faculty.setCourseSectionId(dto.getCourseSectionId());
+        faculty.setFacultyId(dto.getFacultyId());
+
+
+
+        List<String> facultyInsertColumnNameList = new ArrayList<>();
+        List<String> facultyKeyHolderColumnNameList = new ArrayList<>();
+
+        facultyInsertColumnNameList.add(Faculty.getColumnName(Faculty.Columns.USERS_ID));
+        facultyInsertColumnNameList.add(Faculty.getColumnName(Faculty.Columns.REQUIRED_CREDITS));
+        facultyKeyHolderColumnNameList.add(Faculty.getColumnName(Faculty.Columns.ID));
+        facultyKeyHolderColumnNameList.add(Faculty.getColumnName(Faculty.Columns.CREATED_AT));
+        facultyKeyHolderColumnNameList.add(Faculty.getColumnName(Faculty.Columns.UPDATED_AT));
+
+        rowsAffectedList.add(FacultyDao.insert(faculty, facultyInsertColumnNameList, facultyKeyHolderColumnNameList));
+        return rowsAffectedList;
+    }
+
+    @Transactional
+    @Override
+    public List<Integer> unrequestFaculty (FacultyUnrequestCourseDto dto) throws SQLException{
+        List<Integer> rowsAffectedList = new ArrayList<>();
+        List<QueryTerm> queryTermList = new ArrayList<>();
+
+        Integer userId = dto.getFacultyId();
+        queryTermList.add(new QueryTerm(Faculty.getColumnName(Faculty.Columns.ID),EQUAL,userId,null));
+
+        rowsAffectedList.add(FacultyDao.delete(queryTermList));
 
         return rowsAffectedList;
     }
