@@ -6,14 +6,19 @@ import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
+import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.User;
 import org.dselent.scheduling.server.service.UserService;
+import org.dselent.scheduling.server.sqlutils.ColumnOrder;
+import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 
 
 @Service
@@ -37,13 +42,7 @@ public class UserServiceImpl implements UserService
 	{
 		List<Integer> rowsAffectedList = new ArrayList<>();
 		
-		// TODO validate business constraints
-			// ^^students should do this^^
-			// password strength requirements
-			// email requirements
-			// null values
-			// etc...
-		
+
 		String salt = KeyGenerators.string().generateKey();
 		String saltedPassword = dto.getPassword() + salt;
 		PasswordEncoder passwordEncorder = new BCryptPasswordEncoder();
@@ -56,8 +55,7 @@ public class UserServiceImpl implements UserService
 		user.setEmail(dto.getEmail());
 		user.setEncryptedPassword(encryptedPassword);
 		user.setSalt(salt);
-//    	user.setUserStateId(1);
-    	
+
     	List<String> userInsertColumnNameList = new ArrayList<>();
     	List<String> userKeyHolderColumnNameList = new ArrayList<>();
     	
@@ -67,8 +65,7 @@ public class UserServiceImpl implements UserService
     	userInsertColumnNameList.add(User.getColumnName(User.Columns.EMAIL));
     	userInsertColumnNameList.add(User.getColumnName(User.Columns.ENCRYPTED_PASSWORD));
     	userInsertColumnNameList.add(User.getColumnName(User.Columns.SALT));
-//    	userInsertColumnNameList.add(User.getColumnName(User.Columns.USER_STATE_ID));
-    	
+
     	userKeyHolderColumnNameList.add(User.getColumnName(User.Columns.ID));
     	userKeyHolderColumnNameList.add(User.getColumnName(User.Columns.CREATED_AT));
     	userKeyHolderColumnNameList.add(User.getColumnName(User.Columns.UPDATED_AT));
@@ -80,21 +77,7 @@ public class UserServiceImpl implements UserService
     	// for now, assume users can only register with default role id
     	// may change in the future
     	/*
-		UsersRolesLink usersRolesLink = new UsersRolesLink();
-		usersRolesLink.setUserId(user.getId());
-		usersRolesLink.setRoleId(1); // hard coded as regular user
-    	
-    	List<String> usersRolesLinksInsertColumnNameList = new ArrayList<>();
-    	List<String> usersRolesLinksKeyHolderColumnNameList = new ArrayList<>();
-    	
-    	usersRolesLinksInsertColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.USER_ID));
-    	usersRolesLinksInsertColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.ROLE_ID));
-    	
-    	usersRolesLinksKeyHolderColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.ID));
-    	usersRolesLinksKeyHolderColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.CREATED_AT));
-    	usersRolesLinksKeyHolderColumnNameList.add(UsersRolesLink.getColumnName(UsersRolesLink.Columns.DELETED));
-		
-    	rowsAffectedList.add(usersRolesLinksDao.insert(usersRolesLink, usersRolesLinksInsertColumnNameList, usersRolesLinksKeyHolderColumnNameList));
+
 		*/
 		return rowsAffectedList;
 	}
@@ -102,10 +85,45 @@ public class UserServiceImpl implements UserService
 	//
 
 	@Override
-	public User loginUser(String userName, String password)
+	public User loginUser(String userName, String password) throws SQLException
 	{
-		// TODO Auto-generated method stub
-		return null;
+
+		List<String> userSelectColumnNameList = new ArrayList<>();
+		List<QueryTerm> queryTermList = new ArrayList<>();
+
+		// Decide what to grab
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.ID));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.USER_NAME));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.FIRST_NAME));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.LAST_NAME));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.EMAIL));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.ENCRYPTED_PASSWORD));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.SALT));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.CREATED_AT));
+		userSelectColumnNameList.add(User.getColumnName(User.Columns.UPDATED_AT));
+
+		// Create Query Term
+		queryTermList.add(new QueryTerm(User.getColumnName(User.Columns.USER_NAME), EQUAL, userName, null));
+
+		List<User> usersList = usersDao.select(userSelectColumnNameList, queryTermList, null);
+
+		if(usersList.isEmpty()){
+			return null; // Could not find a user with that user name so dont both with everything else
+		}
+
+		User targetUser = usersList.get(1); // There should only be one anyways
+
+		// Check if the password and salt match
+		String saltedPassword = password + targetUser.getSalt();
+		PasswordEncoder passwordEncorder = new BCryptPasswordEncoder();
+		String encryptedPassword = passwordEncorder.encode(saltedPassword);
+
+		if(encryptedPassword == targetUser.getEncryptedPassword()){
+			return targetUser;
+		} else {
+			return null; // Or maybe throw a UserNotFound Exception?
+		}
+
 	}   
 
 }
