@@ -43,8 +43,21 @@ public class CourseServiceImpl implements CourseService{
     public List<Integer> addCourse(CourseAddDto dto) throws SQLException{
         List<Integer> rowsAffectedList = new ArrayList<>();
 
+        Course course = new Course();
+        course.setCourseName(dto.getCourseName());
+        course.setCourseDescription(dto.getCourseName());
 
+        List<String> courseInsertColumnNameList = new ArrayList<>();
+        List<String> courseKeyHolderColumnNameList = new ArrayList<>();
 
+        courseInsertColumnNameList.add(Course.getColumnName(Course.Columns.COURSE_NAME));
+        courseInsertColumnNameList.add(Course.getColumnName(Course.Columns.COURSE_DESCRIPTION));
+
+        courseKeyHolderColumnNameList.add(Course.getColumnName(Course.Columns.ID));
+        courseKeyHolderColumnNameList.add(Course.getColumnName(Course.Columns.CREATED_AT));
+        courseKeyHolderColumnNameList.add(Course.getColumnName(Course.Columns.UPDATED_AT));
+
+        rowsAffectedList.add(coursesDao.insert(course, courseInsertColumnNameList, courseKeyHolderColumnNameList));
 
         return rowsAffectedList;
     }
