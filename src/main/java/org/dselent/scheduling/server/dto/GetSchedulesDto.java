@@ -111,6 +111,10 @@ public class GetSchedulesDto {
             this.Query = Query;
             return this;
         }
+        public Builder withTerm(String Term) {
+            this.Term = Term;
+            return this;
+        }
 
     }
 }
