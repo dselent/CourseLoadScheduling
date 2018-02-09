@@ -3,6 +3,7 @@ package org.dselent.scheduling.server.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.dselent.scheduling.server.dto.UserLoginDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.model.User;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,5 @@ public interface UserService
 	 * @throws SQLException
 	 */
 	public List<Integer> registerUser(UserRegisterDto userRegisterDto) throws SQLException;
-    public User loginUser(String userName, String password) throws SQLException;
+    public User loginUser(UserLoginDto userLoginDto) throws SQLException;
 }
