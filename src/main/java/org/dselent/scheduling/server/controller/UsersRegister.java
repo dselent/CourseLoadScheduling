@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/users/register")
-public interface UserRegister
+@RequestMapping("/user/register")
+public interface UsersRegister
 {
     
     @RequestMapping(method=RequestMethod.POST, value= org.dselent.scheduling.server.requests.UserRegister.REQUEST_NAME)
