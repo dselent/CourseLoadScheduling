@@ -14,8 +14,8 @@ import java.util.Objects;
 public class FacultyModifyDto
 {
     private final Integer UserId;
-    private final String FacultyId;
-    private final String RequiredCredits;
+    private final Integer FacultyId;
+    private final Integer RequiredCredits;
 
 
 
@@ -55,12 +55,12 @@ public class FacultyModifyDto
         return UserId;
     }
 
-    public String getFacultyId()
+    public Integer getFacultyId()
     {
         return FacultyId;
     }
 
-    public String getRequiredCredits()
+    public Integer getRequiredCredits()
     {
         return RequiredCredits;
     }
@@ -82,15 +82,6 @@ public class FacultyModifyDto
         return Objects.hash(UserId, FacultyId, RequiredCredits);
     }
 
-    @Override
-    public String toString() {
-        return "FacultyModifyDto{" +
-                "UserId=" + UserId +
-                ", FacultyId='" + FacultyId + '\'' +
-                ", RequiredCredits='" + RequiredCredits + '\'' +
-                '}';
-    }
-
     /**
      * Creates builder to build {@link FacultyModifyDto}.
      * @return created builder
@@ -108,8 +99,8 @@ public class FacultyModifyDto
     public static final class Builder
     {
         private Integer UserId;
-        private String FacultyId;
-        private String RequiredCredits;
+        private Integer FacultyId;
+        private Integer RequiredCredits;
 
 
 
@@ -123,13 +114,13 @@ public class FacultyModifyDto
             return this;
         }
 
-        public Builder withFacultyId(String FacultyId)
+        public Builder withFacultyId(Integer FacultyId)
         {
             this.FacultyId = FacultyId;
             return this;
         }
 
-        public Builder withRequiredCredits(String RequiredCredits)
+        public Builder withRequiredCredits(Integer RequiredCredits)
         {
             this.RequiredCredits = RequiredCredits;
             return this;
