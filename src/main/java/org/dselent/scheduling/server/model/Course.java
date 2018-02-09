@@ -20,6 +20,7 @@ public class Course extends Model{
         COURSE_DESCRIPTION,
         CREATED_AT,
         UPDATED_AT
+        //hi
     }
 
     // Make a List of the Columns
