@@ -8,10 +8,10 @@ public class CourseSectionTimeModifyDto
 {
     private final Integer CourseSectionTimeId;
     private final Integer CourseSectionId;
-    private final String DayOfWeek;
+    private final Integer DayOfWeek;
     private final Integer StartTime;
     private final Integer EndTime;
-    private final String Location;
+    private final Integer LocationId;
 
 
     // I added to the auto-generated code
@@ -24,7 +24,7 @@ public class CourseSectionTimeModifyDto
         this.DayOfWeek = builder.DayOfWeek;
         this.StartTime = builder.StartTime;
         this.EndTime = builder.EndTime;
-        this.Location = builder.Location;
+        this.LocationId = builder.LocationId;
 
 
         // making claim that none of these can be null
@@ -47,7 +47,7 @@ public class CourseSectionTimeModifyDto
         {
             throw new IllegalStateException("EndTime cannot be null");
         }
-        else if(this.Location == null)
+        else if(this.LocationId == null)
         {
             throw new IllegalStateException("Location cannot be null");
         }
@@ -58,7 +58,7 @@ public class CourseSectionTimeModifyDto
 
     public Integer getCourseSectionId() { return CourseSectionId;}
 
-    public String getDayOfWeek()
+    public Integer getDayOfWeek()
     {
         return DayOfWeek;
     }
@@ -73,9 +73,9 @@ public class CourseSectionTimeModifyDto
         return EndTime;
     }
 
-    public String getLocation()
+    public Integer getLocation()
     {
-        return Location;
+        return LocationId;
     }
 
 
@@ -89,13 +89,13 @@ public class CourseSectionTimeModifyDto
                 Objects.equals(DayOfWeek, that.DayOfWeek) &&
                 Objects.equals(StartTime, that.StartTime) &&
                 Objects.equals(EndTime, that.EndTime) &&
-                Objects.equals(Location, that.Location);
+                Objects.equals(LocationId, that.LocationId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(CourseSectionTimeId, CourseSectionId, DayOfWeek, StartTime, EndTime, Location);
+        return Objects.hash(CourseSectionTimeId, CourseSectionId, DayOfWeek, StartTime, EndTime, LocationId);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class CourseSectionTimeModifyDto
                 ", DayOfWeek='" + DayOfWeek + '\'' +
                 ", StartTime=" + StartTime +
                 ", EndTime=" + EndTime +
-                ", Location='" + Location + '\'' +
+                ", Location='" + LocationId + '\'' +
                 '}';
     }
 
@@ -128,10 +128,10 @@ public class CourseSectionTimeModifyDto
     {
         private Integer CourseSectionTimeId;
         private Integer CourseSectionId;
-        private String DayOfWeek;
+        private Integer DayOfWeek;
         private Integer StartTime;
         private Integer EndTime;
-        private String Location;
+        private Integer LocationId;
 
 
         private Builder()
@@ -148,7 +148,7 @@ public class CourseSectionTimeModifyDto
             return this;
         }
 
-        public Builder withDayOfWeek(String DayOfWeek)
+        public Builder withDayOfWeek(Integer DayOfWeek)
         {
             this.DayOfWeek = DayOfWeek;
             return this;
@@ -166,9 +166,9 @@ public class CourseSectionTimeModifyDto
             return this;
         }
 
-        public Builder withLocation(String Location)
+        public Builder withLocation(Integer LocationId)
         {
-            this.Location = Location;
+            this.LocationId = LocationId;
             return this;
         }
 
