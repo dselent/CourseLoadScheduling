@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.tools.javac.file.Locations;
 import org.dselent.scheduling.server.dao.LocationsDao;
 import org.dselent.scheduling.server.dto.LocationAddDto;
 import org.dselent.scheduling.server.dto.LocationModifyDto;
@@ -39,8 +40,10 @@ public class LocationServiceImpl implements LocationService{
         List<Integer> rowsAffectedList = new ArrayList<>();
 
         Location Location = new Location();
-        Location.setLocationName(dto.getLocationName());
-        Location.setLocationDescription(dto.getLocationName());
+        Location.setBuilding(dto.getBuilding());
+        Location.setRoom(dto.getRoom());
+        Location.setRoom(dto.getRoomSize());
+
 
         /*dunno what to do with this. we'll probably need to add a new thing in BaseDaoImpl*/
         String LocationDept = dto.getLocationDept();
@@ -66,19 +69,21 @@ public class LocationServiceImpl implements LocationService{
         List<QueryTerm> queryTermList = new ArrayList<>();
 
         Integer LocationId = dto.getLocationId();
-        String LocationName = dto.getLocationName();
-        String LocationDescription = dto.getLocationDescription();
+        String LocationBuilding = dto.getBuilding();
+        Integer LocationDescription = dto.getLocationId();
+        Integer LocationRoom = dto.getRoom();
+        Integer LocationRoomSize = dto.getRoomSize();
 
         /*I have no idea how to modify a Location's department. the system'll work okay without it though*/
-        String LocationDept = dto.getLocationDept();
+
 
 
         queryTermList.add(new QueryTerm(Location.getColumnName(Location.Columns.ID),EQUAL,LocationId,null));
 
-        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.BUILDING),LocationName,queryTermList));
-        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ROOM),LocationDescription,queryTermList));
-        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ROOM_SIZE),LocationDescription,queryTermList));
-        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ID),LocationDescription,queryTermList));
+        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.BUILDING),LocationBuilding,queryTermList));
+        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ROOM),LocationRoom,queryTermList));
+        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ROOM_SIZE),LocationRoomSize,queryTermList));
+        rowsAffectedList.add(locationsDao.update(Location.getColumnName(Location.Columns.ID),LocationId,queryTermList));
         return rowsAffectedList;
     }
 
