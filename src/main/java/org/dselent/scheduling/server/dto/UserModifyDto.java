@@ -27,7 +27,7 @@ public class UserModifyDto
 
         // making claim that none of these can be null
         // add other state checks here as necessary
-        if(this.id = null){
+        if(this.id == null){
             throw new IllegalStateException("id cannot be null");
         }
         if(this.userName == null)

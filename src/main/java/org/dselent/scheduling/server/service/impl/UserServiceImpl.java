@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
 import org.dselent.scheduling.server.dto.UserLoginDto;
+import org.dselent.scheduling.server.dto.UserLogoutDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
+import org.dselent.scheduling.server.dto.UserModifyDto;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.User;
+import org.dselent.scheduling.server.requests.UserModify;
 import org.dselent.scheduling.server.service.UserService;
 import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
@@ -82,8 +85,7 @@ public class UserServiceImpl implements UserService
 		*/
 		return rowsAffectedList;
 	}
-	
-	//
+
 
 	@Override
 	public User loginUser(UserLoginDto userLoginDto) throws SQLException
@@ -128,6 +130,15 @@ public class UserServiceImpl implements UserService
 			return null; // Or maybe throw a UserNotFound Exception?
 		}
 
-	}   
+	}
 
+	@Override
+	public User logoutUser(UserLogoutDto userLogoutDto) throws SQLException{
+		return null;
+	}
+
+	@Override
+	public User modifyUser(UserModifyDto userModifyDto) throws SQLException{
+    	return null;
+	}
 }

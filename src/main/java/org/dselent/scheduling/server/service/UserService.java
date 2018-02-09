@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.dselent.scheduling.server.dto.UserLoginDto;
 import org.dselent.scheduling.server.dto.UserLogoutDto;
+import org.dselent.scheduling.server.dto.UserModifyDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.model.User;
 import org.springframework.stereotype.Service;

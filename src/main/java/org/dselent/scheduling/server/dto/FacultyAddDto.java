@@ -14,7 +14,7 @@ import java.util.Objects;
 public class FacultyAddDto
 {
     private final Integer UserId;
-    private final String RequiredCredits;
+    private final Integer RequiredCredits;
 
 
 
@@ -51,7 +51,7 @@ public class FacultyAddDto
         return UserId;
     }
 
-    public String getRequiredCredits()
+    public Integer getRequiredCredits()
     {
         return RequiredCredits;
     }
@@ -76,7 +76,7 @@ public class FacultyAddDto
     public String toString() {
         return "FacultyAddDto{" +
                 "UserId=" + UserId +
-                ", RequiredCredits='" + RequiredCredits + '\'' +
+                ", RequiredCredits=" + RequiredCredits +
                 '}';
     }
 
@@ -97,7 +97,7 @@ public class FacultyAddDto
     public static final class Builder
     {
         private Integer UserId;
-        private String RequiredCredits;
+        private Integer RequiredCredits;
 
 
 
@@ -112,7 +112,7 @@ public class FacultyAddDto
             return this;
         }
 
-        public Builder withRequiredCredits(String RequiredCredits)
+        public Builder withRequiredCredits(Integer RequiredCredits)
         {
             this.RequiredCredits = RequiredCredits;
             return this;
