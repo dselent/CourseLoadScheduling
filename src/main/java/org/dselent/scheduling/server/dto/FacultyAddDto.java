@@ -118,7 +118,6 @@ public class FacultyAddDto
             return this;
         }
 
-        
 
 
         public FacultyAddDto build()
