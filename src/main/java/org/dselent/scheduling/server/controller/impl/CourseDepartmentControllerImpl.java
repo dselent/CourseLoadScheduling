@@ -103,22 +103,12 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         List<Object> success = new ArrayList<Object>();
 
 
-        COURSE_DEPARTMENT_ID,
-                COURSE_ID,
-                DEPARTMENT_ID,
-                COURSE_NUMBER
-
-        Integer courseId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_ID)));
-        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.DEPARTMENT_ID)));
-        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_NUMBER)));
         Integer courseDepartmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_DEPARTMENT_ID)));
 
-        UserLoginDto.Builder builder = UserLoginDto.builder();
-        UserLoginDto userLoginDto = builder.withUserName(userName)
-                .withPassword(password)
-                .build();
+        CourseDepartmentRemoveDto.Builder builder = CourseDepartmentRemoveDto.builder();
+        CourseDepartmentRemoveDto courseDepartmentRemoveDto = builder.withCourseDepartmentId(courseDepartmentId).build();
 
-        userService.loginUser(userLoginDto);
+        courseDepartmentService.removeCourseDepartment(courseDepartmentRemoveDto);
         response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
         return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
