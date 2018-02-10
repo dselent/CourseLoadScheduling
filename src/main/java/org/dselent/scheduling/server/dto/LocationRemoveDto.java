@@ -88,5 +88,10 @@ public class LocationRemoveDto {
             return this;
         }
 
+        public LocationRemoveDto build(){
+            return new LocationRemoveDto(this);
+        }
     }
+
+
 }

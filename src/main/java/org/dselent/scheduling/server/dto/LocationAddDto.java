@@ -115,6 +115,9 @@ public class LocationAddDto {
             this.RoomSize = RoomSize;
             return this;
         }
+        public LocationAddDto build(){
+            return new LocationAddDto(this);
+        }
 
     }
 }

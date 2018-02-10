@@ -131,5 +131,10 @@ public class LocationModifyDto {
             return this;
         }
 
+        public LocationModifyDto build(){
+            return new LocationModifyDto(this);
+        }
+
+
     }
 }
