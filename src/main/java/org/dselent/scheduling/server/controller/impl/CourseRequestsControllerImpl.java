@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CourseRequestsControllerImpl implements CourseRequestsController
 {
     @Autowired
-    private CourseRequestService courseDepartmentService;
+    private CourseRequestService courseRequestService;
 
     /**
      *
@@ -47,19 +47,16 @@ public class CourseRequestsControllerImpl implements CourseRequestsController
         String response = "";
         List<Object> success = new ArrayList<Object>();
 
-        FACULTY_ID,
-                COURSE_SECTION_ID
 
-        Integer courseId = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.COURSE_ID)));
-        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.DEPARTMENT_ID)));
-        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.COURSE_NUMBER)));
 
-        CourseDepartmentAddDto.Builder builder = CourseDepartmentAddDto.builder();
-        CourseDepartmentAddDto courseDepartmentAddDto = builder.withCourseId(courseId)
-                .withDepartmentId(departmentId)
-                .withCourseNumber(courseNumber).build();
+        Integer facultyId = Integer.parseInt(request.get(FacultyRequestCourse.getBodyName(FacultyRequestCourse.BodyKey.FACULTY_ID)));
+        Integer courseSectionId = Integer.parseInt(request.get(FacultyRequestCourse.getBodyName(FacultyRequestCourse.BodyKey.COURSE_SECTION_ID)));
 
-        courseDepartmentService.addCourseDepartment(courseDepartmentAddDto);
+        FacultyRequestCourseDto.Builder builder = FacultyRequestCourseDto.builder();
+        FacultyRequestCourseDto facultyRequestCourseDto = builder.withFacultyId(facultyId)
+                .withCourseSectionId(courseSectionId).build();
+
+        courseRequestService.requestFaculty(facultyRequestCourseDto);
         response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
         return new ResponseEntity<String>(response, HttpStatus.OK);
