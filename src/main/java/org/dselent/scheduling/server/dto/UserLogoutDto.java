@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class UserLogoutDto
 {
-    private final String userId;
+    private final Integer userId;
 
     // I added to the auto-generated code
     @Generated("SparkTools")
@@ -34,7 +34,7 @@ public class UserLogoutDto
         }
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -93,13 +93,13 @@ public class UserLogoutDto
     @Generated("SparkTools")
     public static final class Builder
     {
-        private String userId;
+        private Integer userId;
 
         private Builder()
         {
         }
 
-        public Builder withUserId(String userId)
+        public Builder withUserId(Integer userId)
         {
             this.userId = userId;
             return this;

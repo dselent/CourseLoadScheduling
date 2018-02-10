@@ -29,7 +29,7 @@ public interface UsersController
     //Modifies a User
     @RequestMapping(method=RequestMethod.POST, value= UserModify.REQUEST_NAME)
     public ResponseEntity<String> modify(@RequestBody Map<String, String> request) throws Exception;
-    
+
 }
 
 	

@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.dselent.scheduling.server.controller.UsersController;
 import org.dselent.scheduling.server.dto.UserLoginDto;
+import org.dselent.scheduling.server.dto.UserLogoutDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.UserLogin;
+import org.dselent.scheduling.server.requests.UserLogout;
 import org.dselent.scheduling.server.requests.UserRegister;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,26 @@ public class UsersControllerImpl implements UsersController
 				.build();
 
 		userService.loginUser(userLoginDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
+
+	public ResponseEntity<String> logout(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserLogout.getBodyName(UserLogout.BodyKey.USER_ID)));
+		
+		UserLogoutDto.Builder builder = UserLogoutDto.builder();
+		UserLogoutDto userLogoutDto = builder.withUserId(userId)
+				.build();
+
+		userService.logoutUser(userLogoutDto);
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
