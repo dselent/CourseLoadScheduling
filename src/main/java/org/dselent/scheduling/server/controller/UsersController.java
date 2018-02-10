@@ -2,10 +2,7 @@ package org.dselent.scheduling.server.controller;
 
 import java.util.Map;
 
-import org.dselent.scheduling.server.requests.UserLogin;
-import org.dselent.scheduling.server.requests.UserLogout;
-import org.dselent.scheduling.server.requests.UserModify;
-import org.dselent.scheduling.server.requests.UserRegister;
+import org.dselent.scheduling.server.requests.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +26,10 @@ public interface UsersController
     //Modifies a User
     @RequestMapping(method=RequestMethod.POST, value= UserModify.REQUEST_NAME)
     public ResponseEntity<String> modify(@RequestBody Map<String, String> request) throws Exception;
+
+    //Deactivates a User
+    @RequestMapping(method=RequestMethod.POST, value= UserDeactivate.REQUEST_NAME)
+    public ResponseEntity<String> deactivate(@RequestBody Map<String, String> request) throws Exception;
 
 }
 

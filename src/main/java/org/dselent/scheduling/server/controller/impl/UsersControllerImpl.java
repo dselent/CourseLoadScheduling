@@ -5,15 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.dselent.scheduling.server.controller.UsersController;
-import org.dselent.scheduling.server.dto.UserLoginDto;
-import org.dselent.scheduling.server.dto.UserLogoutDto;
-import org.dselent.scheduling.server.dto.UserModifyDto;
-import org.dselent.scheduling.server.dto.UserRegisterDto;
+import org.dselent.scheduling.server.dto.*;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
-import org.dselent.scheduling.server.requests.UserLogin;
-import org.dselent.scheduling.server.requests.UserLogout;
-import org.dselent.scheduling.server.requests.UserModify;
-import org.dselent.scheduling.server.requests.UserRegister;
+import org.dselent.scheduling.server.requests.*;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -141,8 +135,26 @@ public class UsersControllerImpl implements UsersController
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
 
+	public ResponseEntity<String> deactivate(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
 
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserDeactivate.getBodyName(UserDeactivate.BodyKey.USER_ID)));
+
+		UserDeactivateDto.Builder builder = UserDeactivateDto.builder();
+		UserDeactivateDto userDeactivateDto = builder.withUserId(userId)
+				.build();
+
+		userService.deactivateUser(userDeactivateDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
 	}
 }
 
