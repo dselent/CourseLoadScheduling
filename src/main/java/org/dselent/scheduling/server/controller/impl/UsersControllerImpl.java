@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.dselent.scheduling.server.controller.UsersController;
-import org.dselent.scheduling.server.dto.RegisterUserDto;
+import org.dselent.scheduling.server.dto.*;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
-import org.dselent.scheduling.server.requests.Register;
+import org.dselent.scheduling.server.requests.*;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,31 +38,124 @@ public class UsersControllerImpl implements UsersController
 	public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception 
     {
     	// Print is for testing purposes
-		System.out.println("controller reached");
+		System.out.println("Users controller reached");
     	
 		// add any objects that need to be returned to the success list
 		String response = "";
 		List<Object> success = new ArrayList<Object>();
 		
-		String userName = request.get(Register.getBodyName(Register.BodyKey.USER_NAME));
-		String firstName = request.get(Register.getBodyName(Register.BodyKey.FIRST_NAME));
-		String lastName = request.get(Register.getBodyName(Register.BodyKey.LAST_NAME));
-		String email = request.get(Register.getBodyName(Register.BodyKey.EMAIL));
-		String password = request.get(Register.getBodyName(Register.BodyKey.PASSWORD));
+		String userName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.USER_NAME));
+		String firstName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.FIRST_NAME));
+		String lastName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.LAST_NAME));
+		String email = request.get(UserRegister.getBodyName(UserRegister.BodyKey.EMAIL));
+		String password = request.get(UserRegister.getBodyName(UserRegister.BodyKey.PASSWORD));
 
-		RegisterUserDto.Builder builder = RegisterUserDto.builder();
-		RegisterUserDto registerUserDto = builder.withUserName(userName)
+		UserRegisterDto.Builder builder = UserRegisterDto.builder();
+		UserRegisterDto userRegisterDto = builder.withUserName(userName)
 		.withFirstName(firstName)
 		.withLastName(lastName)
 		.withEmail(email)
 		.withPassword(password)
 		.build();
 		
-		userService.registerUser(registerUserDto);
+		userService.registerUser(userRegisterDto);
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK);
     }
+
+	public ResponseEntity<String> login(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		// add any objects that need to be returned to the success list
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		String userName = request.get(UserLogin.getBodyName(UserLogin.BodyKey.USER_NAME));
+		String password = request.get(UserLogin.getBodyName(UserLogin.BodyKey.PASSWORD));
+
+		UserLoginDto.Builder builder = UserLoginDto.builder();
+		UserLoginDto userLoginDto = builder.withUserName(userName)
+				.withPassword(password)
+				.build();
+
+		userService.loginUser(userLoginDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
+
+	public ResponseEntity<String> logout(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserLogout.getBodyName(UserLogout.BodyKey.USER_ID)));
+		
+		UserLogoutDto.Builder builder = UserLogoutDto.builder();
+		UserLogoutDto userLogoutDto = builder.withUserId(userId)
+				.build();
+
+		userService.logoutUser(userLogoutDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
+
+	public ResponseEntity<String> modify(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserModify.getBodyName(UserModify.BodyKey.USER_ID)));
+		String userName = request.get(UserModify.getBodyName(UserModify.BodyKey.USER_NAME));
+		String firstName = request.get(UserModify.getBodyName(UserModify.BodyKey.FIRST_NAME));
+		String lastName = request.get(UserModify.getBodyName(UserModify.BodyKey.LAST_NAME));
+		String email = request.get(UserModify.getBodyName(UserModify.BodyKey.EMAIL));
+		String password = request.get(UserModify.getBodyName(UserModify.BodyKey.PASSWORD));
+
+		UserModifyDto.Builder builder = UserModifyDto.builder();
+		UserModifyDto userModifyDto = builder.withId(userId)
+				.withUserName(userName)
+				.withFirstName(firstName)
+				.withLastName(lastName)
+				.withEmail(email)
+				.withPassword(password)
+				.build();
+
+		userService.modifyUser(userModifyDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
+
+	public ResponseEntity<String> deactivate(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserDeactivate.getBodyName(UserDeactivate.BodyKey.USER_ID)));
+
+		UserDeactivateDto.Builder builder = UserDeactivateDto.builder();
+		UserDeactivateDto userDeactivateDto = builder.withUserId(userId)
+				.build();
+
+		userService.deactivateUser(userDeactivateDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
 }
 
 	

@@ -8,22 +8,15 @@ package org.dselent.scheduling.server.sqlutils;
  * QueryTerm1:
  * 
  * SELECT * FROM users WHERE id = 1
- * ComparisonOperator = NULL
- * LogicalOperator = EQUAL
+ * ComparisonOperator = EQUAL
+ * LogicalOperator = NULL
  * value = 1
  * 
  * 
  * Example 2:
  * SELECT * FROM users WHERE id = 1 AND user_name = 'xxx'
- * 
- * QueryTerm1
- * ComparisonOperator = NULL
- * LogicalOperator = EQUAL
- * value = 1
- * 
- * QueryTerm2
- * ComparisonOperator = AND
- * LogicalOperator = EQUAL
+ * ComparisonOperator = EQUAL
+ * LogicalOperator = AND
  * value = xxx
  */
 public class QueryTerm

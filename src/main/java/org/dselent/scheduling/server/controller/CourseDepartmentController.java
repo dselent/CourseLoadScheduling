@@ -8,29 +8,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/user")
-public interface UsersController
+@RequestMapping("/courseDepartments")
+public interface CourseDepartmentController
 {
     // Registers a user in the system
     @RequestMapping(method=RequestMethod.POST, value= UserRegister.REQUEST_NAME)
-	public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception;
-
-    // Logs a User into the system
-    @RequestMapping(method=RequestMethod.POST, value= UserLogin.REQUEST_NAME)
-    public ResponseEntity<String> login(@RequestBody Map<String, String> request) throws Exception;
-
-    //Logs a User out of the system
-    @RequestMapping(method=RequestMethod.POST, value= UserLogout.REQUEST_NAME)
-    public ResponseEntity<String> logout(@RequestBody Map<String,String> request) throws Exception;
-
+    public ResponseEntity<String> add(@RequestBody Map<String, String> request) throws Exception;
+    
     //Modifies a User
     @RequestMapping(method=RequestMethod.POST, value= UserModify.REQUEST_NAME)
     public ResponseEntity<String> modify(@RequestBody Map<String, String> request) throws Exception;
 
     //Deactivates a User
     @RequestMapping(method=RequestMethod.POST, value= UserDeactivate.REQUEST_NAME)
-    public ResponseEntity<String> deactivate(@RequestBody Map<String, String> request) throws Exception;
+    public ResponseEntity<String> remove(@RequestBody Map<String, String> request) throws Exception;
 
 }
-
-	
