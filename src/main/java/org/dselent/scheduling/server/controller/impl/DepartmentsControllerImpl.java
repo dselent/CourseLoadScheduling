@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * Created by Nathan on 2/9/2018.
  */
+
 public class DepartmentsControllerImpl implements DepartmentsController {
     @Autowired
     DepartmentService departmentService;
