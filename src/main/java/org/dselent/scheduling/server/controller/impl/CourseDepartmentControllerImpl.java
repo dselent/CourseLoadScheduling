@@ -40,7 +40,7 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
      * @return A ResponseEntity for the response object(s) and the status code
      * @throws Exception
      */
-    public ResponseEntity<String> CourseDepartmentAdd (@RequestBody Map<String, String> request) throws Exception
+    public ResponseEntity<String> add (@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
         System.out.println("Users controller reached");
@@ -66,7 +66,7 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> CourseDepartmentModify (@RequestBody Map<String, String> request) throws Exception
+    public ResponseEntity<String> modify (@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
         System.out.println("Users controller reached");
@@ -93,7 +93,7 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
 
         return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
     }
-    public ResponseEntity<String> CourseDepartmentRemove (@RequestBody Map<String, String> request) throws Exception
+    public ResponseEntity<String> remove (@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
         System.out.println("Users controller reached");

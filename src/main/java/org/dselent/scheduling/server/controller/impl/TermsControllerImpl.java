@@ -93,7 +93,7 @@ public class TermsControllerImpl implements TermsController
         String response = "";
         List<Object> success = new ArrayList<Object>();
 
-        Integer termId = Integer.parseInt(request.get(TermModify.getBodyName(TermModify.BodyKey.TERM_ID)));
+        Integer termId = Integer.parseInt(request.get(TermRemove.getBodyName(TermRemove.BodyKey.TERM_ID)));
 
         TermRemoveDto.Builder builder = TermRemoveDto.builder();
         TermRemoveDto termRemoveDto = builder.withTermId(termId)
