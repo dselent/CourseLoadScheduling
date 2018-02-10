@@ -7,10 +7,12 @@ import java.util.Map;
 import org.dselent.scheduling.server.controller.UsersController;
 import org.dselent.scheduling.server.dto.UserLoginDto;
 import org.dselent.scheduling.server.dto.UserLogoutDto;
+import org.dselent.scheduling.server.dto.UserModifyDto;
 import org.dselent.scheduling.server.dto.UserRegisterDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.UserLogin;
 import org.dselent.scheduling.server.requests.UserLogout;
+import org.dselent.scheduling.server.requests.UserModify;
 import org.dselent.scheduling.server.requests.UserRegister;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +111,37 @@ public class UsersControllerImpl implements UsersController
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+	}
+
+	public ResponseEntity<String> modify(@RequestBody Map<String, String> request) throws Exception
+	{
+		// Print is for testing purposes
+		System.out.println("Users controller reached");
+
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+
+		Integer userId = Integer.parseInt(request.get(UserModify.getBodyName(UserModify.BodyKey.USER_ID)));
+		String userName = request.get(UserModify.getBodyName(UserModify.BodyKey.USER_NAME));
+		String firstName = request.get(UserModify.getBodyName(UserModify.BodyKey.FIRST_NAME));
+		String lastName = request.get(UserModify.getBodyName(UserModify.BodyKey.LAST_NAME));
+		String email = request.get(UserModify.getBodyName(UserModify.BodyKey.EMAIL));
+		String password = request.get(UserModify.getBodyName(UserModify.BodyKey.PASSWORD));
+
+		UserModifyDto.Builder builder = UserModifyDto.builder();
+		UserModifyDto userModifyDto = builder.withId(userId)
+				.withUserName(userName)
+				.withFirstName(firstName)
+				.withLastName(lastName)
+				.withEmail(email)
+				.withPassword(password)
+				.build();
+
+		userService.modifyUser(userModifyDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+
 	}
 }
 
