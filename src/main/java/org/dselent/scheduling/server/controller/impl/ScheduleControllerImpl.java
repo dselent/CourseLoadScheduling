@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ScheduleControllerImpl implements ScheduleController{
-
+/**
     @Autowired
     private ScheduleService scheduleService; // Not sure what this is?
 
     /* @rob it's a file that needs to be made in the service @ service/impl folder
         -Nathan
-     */
+
 
 
     @Override
@@ -42,4 +42,5 @@ public class ScheduleControllerImpl implements ScheduleController{
 
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
+    */
 }
