@@ -95,7 +95,7 @@ public class DepartmentRemoveDto
         {
         }
 
-        public Builder withDepartment(Integer Department)
+        public Builder withDepartmentId(Integer Department)
         {
             this.Department_Id = Department_Id;
             return this;
