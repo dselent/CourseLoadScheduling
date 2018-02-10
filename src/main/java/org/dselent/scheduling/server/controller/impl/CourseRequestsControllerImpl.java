@@ -27,26 +27,22 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 
 @Controller
-public class CourseRequestsControllerImpl implements CourseRequestsController
-{
+public class CourseRequestsControllerImpl implements CourseRequestsController {
     @Autowired
     private CourseRequestService courseRequestService;
 
     /**
-     *
      * @param request The body of the request expected to contain a map of String key-value pairs
      * @return A ResponseEntity for the response object(s) and the status code
      * @throws Exception
      */
-    public ResponseEntity<String> request (@RequestBody Map<String, String> request) throws Exception
-    {
+    public ResponseEntity<String> request(@RequestBody Map<String, String> request) throws Exception {
         // Print is for testing purposes
         System.out.println("Users controller reached");
 
         // add any objects that need to be returned to the success list
         String response = "";
         List<Object> success = new ArrayList<Object>();
-
 
 
         Integer facultyId = Integer.parseInt(request.get(FacultyRequestCourse.getBodyName(FacultyRequestCourse.BodyKey.FACULTY_ID)));
@@ -62,8 +58,7 @@ public class CourseRequestsControllerImpl implements CourseRequestsController
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> unrequest (@RequestBody Map<String, String> request) throws Exception
-    {
+    public ResponseEntity<String> unrequest(@RequestBody Map<String, String> request) throws Exception {
         // Print is for testing purposes
         System.out.println("Users controller reached");
 
@@ -71,22 +66,16 @@ public class CourseRequestsControllerImpl implements CourseRequestsController
         String response = "";
         List<Object> success = new ArrayList<Object>();
 
+        Integer courseRequestId = Integer.parseInt(request.get(FacultyUnrequestCourse.getBodyName(FacultyUnrequestCourse.BodyKey.COURSE_REQUEST_ID)));
 
 
-        Integer courseId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_ID)));
-        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.DEPARTMENT_ID)));
-        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_NUMBER)));
-        Integer courseDepartmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_DEPARTMENT_ID)));
+        FacultyUnrequestCourseDto.Builder builder = FacultyUnrequestCourseDto.builder();
+        FacultyUnrequestCourseDto facultyUnrequestCourseDto = builder.withCourseSectionId(courseRequestId).build();
 
-        CourseDepartmentModifyDto.Builder builder = CourseDepartmentModifyDto.builder();
-        CourseDepartmentModifyDto courseDepartmentModifyDto = builder.withCourseDepartmentId(courseDepartmentId)
-                .withCourseId(courseId)
-                .withDepartmentId(departmentId)
-                .withCourseNumber(courseNumber).build();
-
-        courseDepartmentService.modifyCourseDepartment(courseDepartmentModifyDto);
+        courseRequestService.unrequestFaculty(facultyUnrequestCourseDto);
         response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
         return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
     }
+}
 
