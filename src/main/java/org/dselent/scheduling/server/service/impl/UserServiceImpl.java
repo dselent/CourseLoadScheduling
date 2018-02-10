@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
-import org.dselent.scheduling.server.dto.UserLoginDto;
-import org.dselent.scheduling.server.dto.UserLogoutDto;
-import org.dselent.scheduling.server.dto.UserRegisterDto;
-import org.dselent.scheduling.server.dto.UserModifyDto;
+import org.dselent.scheduling.server.dto.*;
 import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.User;
 import org.dselent.scheduling.server.requests.UserModify;
@@ -140,5 +137,17 @@ public class UserServiceImpl implements UserService
 	@Override
 	public User modifyUser(UserModifyDto userModifyDto) throws SQLException{
     	return null;
+	}
+
+	public List<Integer> deactivateUser(UserDeactivateDto dto) throws SQLException{
+		List<Integer> rowsAffectedList = new ArrayList<>();
+		List<QueryTerm> queryTermList = new ArrayList<>();
+
+		Integer userId = dto.getUserId();
+		queryTermList.add(new QueryTerm(User.getColumnName(User.Columns.ID),EQUAL,userId,null));
+
+		rowsAffectedList.add(usersDao.delete(queryTermList));
+
+		return rowsAffectedList;
 	}
 }
