@@ -66,7 +66,34 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> login(@RequestBody Map<String, String> request) throws Exception
+    public ResponseEntity<String> CourseDepartmentModify (@RequestBody Map<String, String> request) throws Exception
+    {
+        // Print is for testing purposes
+        System.out.println("Users controller reached");
+
+        // add any objects that need to be returned to the success list
+        String response = "";
+        List<Object> success = new ArrayList<Object>();
+
+
+
+        Integer courseId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_ID)));
+        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.DEPARTMENT_ID)));
+        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_NUMBER)));
+        Integer courseDepartmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_DEPARTMENT_ID)));
+
+        CourseDepartmentModifyDto.Builder builder = CourseDepartmentModifyDto.builder();
+        CourseDepartmentModifyDto courseDepartmentModifyDto = builder.withCourseDepartmentId(courseDepartmentId)
+                .withCourseId(courseId)
+                .withDepartmentId(departmentId)
+                .withCourseNumber(courseNumber).build();
+
+        courseDepartmentService.modifyCourseDepartment(courseDepartmentModifyDto);
+        response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+        return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
+    }
+    public ResponseEntity<String> CourseDepartmentRemove (@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
         System.out.println("Users controller reached");
@@ -81,8 +108,10 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
                 DEPARTMENT_ID,
                 COURSE_NUMBER
 
-        String userName = request.get(UserLogin.getBodyName(UserLogin.BodyKey.USER_NAME));
-        String password = request.get(UserLogin.getBodyName(UserLogin.BodyKey.PASSWORD));
+        Integer courseId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_ID)));
+        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.DEPARTMENT_ID)));
+        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_NUMBER)));
+        Integer courseDepartmentId = Integer.parseInt(request.get(CourseDepartmentModify.getBodyName(CourseDepartmentModify.BodyKey.COURSE_DEPARTMENT_ID)));
 
         UserLoginDto.Builder builder = UserLoginDto.builder();
         UserLoginDto userLoginDto = builder.withUserName(userName)
@@ -95,3 +124,5 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         return new ResponseEntity<String>(response, HttpStatus.OK); // We will have to return some info about the user, like access permissions
     }
 }
+
+
