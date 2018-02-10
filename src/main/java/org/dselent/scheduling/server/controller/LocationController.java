@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+@RequestMapping("/location")
 public interface  LocationController {
     @RequestMapping(method= RequestMethod.POST, value= LocationAdd.REQUEST_NAME)
     public ResponseEntity<String> locationAdd(@RequestBody Map<String, String> request) throws Exception;
