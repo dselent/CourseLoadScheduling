@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class DepartmentAddDto
 {
-    private final Integer Department;
+    private final String Department;
 
 
 
@@ -42,7 +42,7 @@ public class DepartmentAddDto
 
     }
 
-    public Integer getDepartment()
+    public String getDepartment()
     {
         return Department;
     }
@@ -85,7 +85,7 @@ public class DepartmentAddDto
     @Generated("SparkTools")
     public static final class Builder
     {
-        private Integer Department;
+        private String Department;
 
 
 
@@ -95,7 +95,7 @@ public class DepartmentAddDto
         {
         }
 
-        public Builder withDepartment(Integer Department)
+        public Builder withDepartment(String Department)
         {
             this.Department = Department;
             return this;
