@@ -40,7 +40,7 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
      * @return A ResponseEntity for the response object(s) and the status code
      * @throws Exception
      */
-    public ResponseEntity<String> register(@RequestBody Map<String, String> request) throws Exception
+    public ResponseEntity<String> CourseDepartmentAdd (@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
         System.out.println("Users controller reached");
@@ -49,21 +49,18 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         String response = "";
         List<Object> success = new ArrayList<Object>();
 
-        String userName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.USER_NAME));
-        String firstName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.FIRST_NAME));
-        String lastName = request.get(UserRegister.getBodyName(UserRegister.BodyKey.LAST_NAME));
-        String email = request.get(UserRegister.getBodyName(UserRegister.BodyKey.EMAIL));
-        String password = request.get(UserRegister.getBodyName(UserRegister.BodyKey.PASSWORD));
 
-        UserRegisterDto.Builder builder = UserRegisterDto.builder();
-        UserRegisterDto userRegisterDto = builder.withUserName(userName)
-                .withFirstName(firstName)
-                .withLastName(lastName)
-                .withEmail(email)
-                .withPassword(password)
-                .build();
 
-        userService.registerUser(userRegisterDto);
+        Integer courseId = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.COURSE_ID)));
+        Integer departmentId = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.DEPARTMENT_ID)));
+        Integer courseNumber = Integer.parseInt(request.get(CourseDepartmentAdd.getBodyName(CourseDepartmentAdd.BodyKey.COURSE_NUMBER)));
+
+        CourseDepartmentAddDto.Builder builder = CourseDepartmentAddDto.builder();
+        CourseDepartmentAddDto courseDepartmentAddDto = builder.withCourseId(courseId)
+                .withDepartmentId(departmentId)
+                .withCourseNumber(courseNumber).build();
+
+        courseDepartmentService.addCourseDepartment(courseDepartmentAddDto);
         response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
         return new ResponseEntity<String>(response, HttpStatus.OK);
@@ -77,6 +74,12 @@ public class CourseDepartmentControllerImpl implements CourseDepartmentControlle
         // add any objects that need to be returned to the success list
         String response = "";
         List<Object> success = new ArrayList<Object>();
+
+
+        COURSE_DEPARTMENT_ID,
+                COURSE_ID,
+                DEPARTMENT_ID,
+                COURSE_NUMBER
 
         String userName = request.get(UserLogin.getBodyName(UserLogin.BodyKey.USER_NAME));
         String password = request.get(UserLogin.getBodyName(UserLogin.BodyKey.PASSWORD));
