@@ -1,6 +1,5 @@
 package org.dselent.scheduling.server.sqlutils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.scheduling.server.miscellaneous.Pair;
