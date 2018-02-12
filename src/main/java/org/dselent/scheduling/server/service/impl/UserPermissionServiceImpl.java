@@ -6,21 +6,13 @@ import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersPermissionsDao;
 import org.dselent.scheduling.server.dto.AdminChangeUserRoleDto;
-import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.UserPermission;
-import org.dselent.scheduling.server.requests.AdminChangeUserRole;
 import org.dselent.scheduling.server.service.UserPermissionService;
-import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.keygen.KeyGenerators;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 
-
+@Service
 public class UserPermissionServiceImpl implements UserPermissionService
 {
     private UsersPermissionsDao usersPermissionsDao;

@@ -8,12 +8,14 @@ import org.dselent.scheduling.server.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Controller
 public class LocationControllerImpl implements LocationController{
 
     private LocationService locationService;

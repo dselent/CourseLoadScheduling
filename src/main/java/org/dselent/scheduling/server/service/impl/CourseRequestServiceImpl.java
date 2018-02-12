@@ -1,6 +1,5 @@
 package org.dselent.scheduling.server.service.impl;
 
-import org.dselent.scheduling.server.dao.TermsDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,24 +7,14 @@ import java.util.List;
 import org.dselent.scheduling.server.dao.CourseRequestsDao;
 import org.dselent.scheduling.server.dto.FacultyRequestCourseDto;
 import org.dselent.scheduling.server.dto.FacultyUnrequestCourseDto;
-import org.dselent.scheduling.server.miscellaneous.Pair;
-import org.dselent.scheduling.server.model.Course;
-import org.dselent.scheduling.server.model.Term;
 import org.dselent.scheduling.server.model.CourseRequest;
-import org.dselent.scheduling.server.requests.FacultyRequestCourse;
-import org.dselent.scheduling.server.requests.FacultyUnrequestCourse;
 import org.dselent.scheduling.server.service.CourseRequestService;
-import org.dselent.scheduling.server.service.TermService;
-import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.keygen.KeyGenerators;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 
+@Service
 public class CourseRequestServiceImpl implements CourseRequestService
 {
     private CourseRequestsDao courseRequestsDao;

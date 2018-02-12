@@ -6,11 +6,8 @@ import java.util.List;
 
 import org.dselent.scheduling.server.dao.UsersDao;
 import org.dselent.scheduling.server.dto.*;
-import org.dselent.scheduling.server.miscellaneous.Pair;
 import org.dselent.scheduling.server.model.User;
-import org.dselent.scheduling.server.requests.UserModify;
 import org.dselent.scheduling.server.service.UserService;
-import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -5,7 +5,6 @@ import org.dselent.scheduling.server.dto.CourseSectionTimeAddDto;
 import org.dselent.scheduling.server.dto.CourseSectionTimeModifyDto;
 import org.dselent.scheduling.server.dto.CourseSectionTimeRemoveDto;
 import org.dselent.scheduling.server.model.CourseTime;
-import org.dselent.scheduling.server.requests.CourseSectionTimeRemove;
 import org.dselent.scheduling.server.service.CourseSectionTimeService;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -15,11 +15,13 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryStringBuilder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 
 /**
  * Created by Nathan on 2/2/2018.
  */
+@Repository
 public class UsersPermissionsDaoImpl extends BaseDaoImpl<UserPermission> implements UsersPermissionsDao{
 
     @Override

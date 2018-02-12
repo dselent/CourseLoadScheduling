@@ -15,7 +15,9 @@ import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryStringBuilder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartment> implements CoursesDepartmentDao {
 
     @Override

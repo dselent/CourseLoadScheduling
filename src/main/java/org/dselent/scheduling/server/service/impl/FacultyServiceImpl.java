@@ -4,16 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dselent.scheduling.server.dao.CourseRequestsDao;
 import org.dselent.scheduling.server.dao.FacultyDao;
 import org.dselent.scheduling.server.dto.FacultyAddDto;
 import org.dselent.scheduling.server.dto.FacultyModifyDto;
 import org.dselent.scheduling.server.dto.FacultyRemoveDto;
-import org.dselent.scheduling.server.dto.FacultyRequestCourseDto;
-import org.dselent.scheduling.server.dto.FacultyUnrequestCourseDto;
 import org.dselent.scheduling.server.model.Faculty;
-import org.dselent.scheduling.server.model.CourseRequest;
-import org.dselent.scheduling.server.requests.FacultyRequestCourse;
 import org.dselent.scheduling.server.service.FacultyService;
 
 import org.dselent.scheduling.server.sqlutils.QueryTerm;

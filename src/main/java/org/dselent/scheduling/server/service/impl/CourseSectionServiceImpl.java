@@ -15,7 +15,6 @@ import org.dselent.scheduling.server.model.CourseSectionTerm;
 import org.dselent.scheduling.server.model.Term;
 import org.dselent.scheduling.server.service.CourseSectionService;
 
-import org.dselent.scheduling.server.sqlutils.ComparisonOperator;
 import org.dselent.scheduling.server.sqlutils.LogicalOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;

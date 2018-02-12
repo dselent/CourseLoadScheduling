@@ -4,18 +4,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.dselent.scheduling.server.dao.DepartmentsDao;
 
-import org.dselent.scheduling.server.dao.DepartmentsDao;
 import org.dselent.scheduling.server.dto.DepartmentAddDto;
 import org.dselent.scheduling.server.dto.DepartmentModifyDto;
 import org.dselent.scheduling.server.dto.DepartmentRemoveDto;
 import org.dselent.scheduling.server.model.Department;
 import org.dselent.scheduling.server.service.DepartmentService;
 
-import org.dselent.scheduling.server.service.DepartmentService;
-import org.dselent.scheduling.server.sqlutils.LogicalOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

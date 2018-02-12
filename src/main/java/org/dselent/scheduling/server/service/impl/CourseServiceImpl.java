@@ -12,7 +12,6 @@ import org.dselent.scheduling.server.dto.CourseRemoveDto;
 import org.dselent.scheduling.server.model.Course;
 import org.dselent.scheduling.server.service.CourseService;
 
-import org.dselent.scheduling.server.sqlutils.LogicalOperator;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
