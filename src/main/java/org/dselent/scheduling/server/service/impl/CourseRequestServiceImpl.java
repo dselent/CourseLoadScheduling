@@ -10,6 +10,7 @@ import org.dselent.scheduling.server.dto.FacultyUnrequestCourseDto;
 import org.dselent.scheduling.server.model.CourseRequest;
 import org.dselent.scheduling.server.service.CourseRequestService;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
@@ -17,6 +18,7 @@ import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 @Service
 public class CourseRequestServiceImpl implements CourseRequestService
 {
+	@Autowired
     private CourseRequestsDao courseRequestsDao;
 
     public CourseRequestServiceImpl()

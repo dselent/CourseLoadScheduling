@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class CourseSectionsControllerImpl implements CourseSectionsController{
     @Autowired
-    CourseSectionService courseSectionService;
+    private CourseSectionService courseSectionService;
 
     public ResponseEntity<String> add(@RequestBody Map<String, String> request) throws Exception
     {

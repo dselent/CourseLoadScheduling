@@ -11,6 +11,7 @@ import org.dselent.scheduling.server.dto.TermRemoveDto;
 import org.dselent.scheduling.server.model.Term;
 import org.dselent.scheduling.server.service.TermService;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
@@ -18,6 +19,7 @@ import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 @Service
 public class TermServiceImpl implements TermService
 {
+	@Autowired
     private TermsDao termsDao;
 
     public TermServiceImpl(){

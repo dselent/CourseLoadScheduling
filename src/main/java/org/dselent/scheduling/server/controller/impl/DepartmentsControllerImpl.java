@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class DepartmentsControllerImpl implements DepartmentsController {
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     public ResponseEntity<String> add(@RequestBody Map<String, String> request) throws Exception
     {

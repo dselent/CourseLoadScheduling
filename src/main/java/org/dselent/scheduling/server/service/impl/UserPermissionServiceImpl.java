@@ -9,12 +9,14 @@ import org.dselent.scheduling.server.dto.AdminChangeUserRoleDto;
 import org.dselent.scheduling.server.model.UserPermission;
 import org.dselent.scheduling.server.service.UserPermissionService;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 
 @Service
 public class UserPermissionServiceImpl implements UserPermissionService
 {
+	@Autowired
     private UsersPermissionsDao usersPermissionsDao;
 
     public UserPermissionServiceImpl(){

@@ -18,9 +18,9 @@ import java.util.Map;
 @Controller
 public class LocationControllerImpl implements LocationController{
 
+    @Autowired
     private LocationService locationService;
 
-    @Autowired
     public ResponseEntity<String> locationAdd(@RequestBody Map<String, String> request) throws Exception
     {
         // Print is for testing purposes
