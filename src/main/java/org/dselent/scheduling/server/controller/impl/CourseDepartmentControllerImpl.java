@@ -11,7 +11,6 @@ import org.dselent.scheduling.server.dto.CourseDepartmentRemoveDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.CourseDepartmentAdd;
 import org.dselent.scheduling.server.requests.CourseDepartmentModify;
-import org.dselent.scheduling.server.requests.CourseDepartmentRemove;
 import org.dselent.scheduling.server.service.CourseDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

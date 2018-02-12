@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dselent.scheduling.server.controller.LocationController;
 import org.dselent.scheduling.server.dao.LocationsDao;
 import org.dselent.scheduling.server.dto.LocationAddDto;
 import org.dselent.scheduling.server.dto.LocationModifyDto;

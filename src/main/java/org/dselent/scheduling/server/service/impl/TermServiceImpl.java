@@ -5,28 +5,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dselent.scheduling.server.dao.TermsDao;
 import org.dselent.scheduling.server.dto.TermModifyDto;
 import org.dselent.scheduling.server.dto.TermAddDto;
 import org.dselent.scheduling.server.dto.TermRemoveDto;
-import org.dselent.scheduling.server.miscellaneous.Pair;
-import org.dselent.scheduling.server.model.Course;
 import org.dselent.scheduling.server.model.Term;
-import org.dselent.scheduling.server.model.User;
-import org.dselent.scheduling.server.requests.TermRemove;
 import org.dselent.scheduling.server.service.TermService;
-import org.dselent.scheduling.server.sqlutils.ColumnOrder;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.keygen.KeyGenerators;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 
+@Service
 public class TermServiceImpl implements TermService
 {
+	@Autowired
     private TermsDao termsDao;
 
     public TermServiceImpl(){

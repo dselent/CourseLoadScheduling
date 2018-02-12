@@ -44,7 +44,7 @@ INSERT INTO users(user_name,first_name,last_name,email,encrypted_password,salt) 
 ('XK1','Xiangan','Kong','Kong','',''),
 ('YL2','Yanhua','Li','Li','','');
 
-INSERT INTO user_permissions(users_id, role) VALUES
+INSERT INTO users_permissions(users_id, role) VALUES
 ((SELECT id FROM users WHERE user_name = 'TEMP1'), 'Faculty'),
 ((SELECT id FROM users WHERE user_name = 'A1K'), 'Faculty'),
 ((SELECT id FROM users WHERE user_name = 'BN1'), 'Faculty'),
@@ -88,7 +88,7 @@ INSERT INTO user_permissions(users_id, role) VALUES
 ((SELECT id FROM users WHERE user_name = 'TG1'), 'Faculty'),
 ((SELECT id FROM users WHERE user_name = 'W1W'), 'Faculty'),
 ((SELECT id FROM users WHERE user_name = 'XK1'), 'Faculty'),
-((SELECT id FROM users WHERE user_name = 'YL2'), 'Faculty')
+((SELECT id FROM users WHERE user_name = 'YL2'), 'Faculty');
 
 
 INSERT INTO terms(term_name) VALUES
@@ -187,3 +187,4 @@ INSERT INTO course_requests(faculty_id,course_sections_id) VALUES
 
 INSERT INTO course_sections_terms(course_sections_id,terms_id) VALUES
 ((SELECT id FROM course_sections WHERE courses_id = (SELECT id FROM courses WHERE course_name = '1004')),(SELECT id FROM terms WHERE term_name = 'C'));
+

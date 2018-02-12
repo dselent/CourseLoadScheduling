@@ -1,7 +1,5 @@
 package org.dselent.scheduling.server.dto;
 
-import org.dselent.scheduling.server.requests.UserDeactivate;
-
 import javax.annotation.Generated;
 import java.util.Objects;
 

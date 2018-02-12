@@ -7,7 +7,6 @@ import java.util.Map;
 import org.dselent.scheduling.server.controller.CourseSectionsController;
 import org.dselent.scheduling.server.dto.*;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
-import org.dselent.scheduling.server.model.CourseSection;
 import org.dselent.scheduling.server.requests.*;
 import org.dselent.scheduling.server.service.CourseSectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * Created by Nathan on 2/9/2018.
  */
+@Controller
 public class CourseSectionsControllerImpl implements CourseSectionsController{
     @Autowired
-    CourseSectionService courseSectionService;
+    private CourseSectionService courseSectionService;
 
     public ResponseEntity<String> add(@RequestBody Map<String, String> request) throws Exception
     {

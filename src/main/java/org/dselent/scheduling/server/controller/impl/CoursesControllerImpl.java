@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.dselent.scheduling.server.controller.CourseDepartmentController;
 import org.dselent.scheduling.server.controller.CoursesController;
 import org.dselent.scheduling.server.dto.CourseAddDto;
 import org.dselent.scheduling.server.dto.CourseRemoveDto;

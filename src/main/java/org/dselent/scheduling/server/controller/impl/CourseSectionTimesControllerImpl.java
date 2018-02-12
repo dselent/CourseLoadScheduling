@@ -13,7 +13,6 @@ import org.dselent.scheduling.server.requests.CourseSectionTimeRemove;
 import org.dselent.scheduling.server.requests.CourseSectionTimeModify;
 import org.dselent.scheduling.server.requests.CourseSectionTimeAdd;
 import org.dselent.scheduling.server.service.CourseSectionTimeService;
-import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +79,7 @@ public class CourseSectionTimesControllerImpl implements CourseSectionTimesContr
         String response = "";
         List<Object> success = new ArrayList<Object>();
 
-        Integer courseSectionTimeId = Integer.parseInt(request.get(CourseSectionTimeModify.getBodyName(CourseSectionTimeModify.BodyKey.COURSE_SECTION_TIME_ID)))
+        Integer courseSectionTimeId = Integer.parseInt(request.get(CourseSectionTimeModify.getBodyName(CourseSectionTimeModify.BodyKey.COURSE_SECTION_TIME_ID)));
         Integer courseSectionId = Integer.parseInt(request.get(CourseSectionTimeModify.getBodyName(CourseSectionTimeModify.BodyKey.COURSE_SECTION_ID)));
         Integer dayOfWeek = Integer.parseInt(request.get(CourseSectionTimeModify.getBodyName(CourseSectionTimeModify.BodyKey.DAY_OF_WEEK)));
         Integer startTime = Integer.parseInt(request.get(CourseSectionTimeModify.getBodyName(CourseSectionTimeModify.BodyKey.START_TIME)));

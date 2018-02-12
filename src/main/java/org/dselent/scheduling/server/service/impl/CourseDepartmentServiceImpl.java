@@ -41,8 +41,8 @@ public class CourseDepartmentServiceImpl implements CourseDepartmentService{
         List<String> courseInsertColumnNameList = new ArrayList<>();
         List<String> courseKeyHolderColumnNameList = new ArrayList<>();
 
-        courseInsertColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_ID));
-        courseInsertColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENT_ID));
+        courseInsertColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSES_ID));
+        courseInsertColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENTS_ID));
         courseInsertColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_NUMBER));
 
         courseKeyHolderColumnNameList.add(CourseDepartment.getColumnName(CourseDepartment.Columns.ID));
@@ -67,8 +67,8 @@ public class CourseDepartmentServiceImpl implements CourseDepartmentService{
 
         queryTermList.add(new QueryTerm(CourseDepartment.getColumnName(CourseDepartment.Columns.ID), EQUAL,courseDepartmentId,null));
 
-        rowsAffectedList.add(coursesDepartmentDao.update(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_ID),courseId,queryTermList));
-        rowsAffectedList.add(coursesDepartmentDao.update(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENT_ID),departmentId,queryTermList));
+        rowsAffectedList.add(coursesDepartmentDao.update(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSES_ID),courseId,queryTermList));
+        rowsAffectedList.add(coursesDepartmentDao.update(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENTS_ID),departmentId,queryTermList));
         rowsAffectedList.add(coursesDepartmentDao.update(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_NUMBER),setCourseNumber,queryTermList));
 
         return rowsAffectedList;

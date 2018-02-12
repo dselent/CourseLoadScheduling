@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * Created by Nathan on 2/9/2018.
  */
-
+@Controller
 public class DepartmentsControllerImpl implements DepartmentsController {
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     public ResponseEntity<String> add(@RequestBody Map<String, String> request) throws Exception
     {

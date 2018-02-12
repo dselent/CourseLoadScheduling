@@ -13,8 +13,8 @@ public class CourseDepartment extends Model {
     // Column Names
     public static enum Columns {
         ID,
-        COURSE_ID,
-        DEPARTMENT_ID,
+        COURSES_ID,
+        DEPARTMENTS_ID,
         COURSE_NUMBER,
         CREATED_AT,
         UPDATED_AT
@@ -32,8 +32,8 @@ public class CourseDepartment extends Model {
         }
 
         COLUMN_TYPE_MAP.put(Columns.ID, JDBCType.INTEGER);
-        COLUMN_TYPE_MAP.put(Columns.COURSE_ID, JDBCType.INTEGER);
-        COLUMN_TYPE_MAP.put(Columns.DEPARTMENT_ID, JDBCType.INTEGER);
+        COLUMN_TYPE_MAP.put(Columns.COURSES_ID, JDBCType.INTEGER);
+        COLUMN_TYPE_MAP.put(Columns.DEPARTMENTS_ID, JDBCType.INTEGER);
         COLUMN_TYPE_MAP.put(Columns.COURSE_NUMBER, JDBCType.INTEGER);
         COLUMN_TYPE_MAP.put(Columns.CREATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);
         COLUMN_TYPE_MAP.put(Columns.UPDATED_AT, JDBCType.TIMESTAMP_WITH_TIMEZONE);

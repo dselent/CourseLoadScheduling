@@ -6,6 +6,8 @@ CREATE TABLE users(
 	email varchar (255) UNIQUE NOT NULL,
 	encrypted_password varchar (255) NOT NULL,
 	salt varchar (255) NOT NULL,
+	created_at timestamp with time zone NOT NULL DEFAULT(CURRENT_TIMESTAMP),
+	updated_at timestamp with time zone NOT NULL DEFAULT(CURRENT_TIMESTAMP)
 
 );
 
