@@ -59,11 +59,11 @@ public class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartment> impl
         {
             parameters.addValue(parameterName, courseModel.getId());
         }
-        else if (insertColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_ID)))
+        else if (insertColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSES_ID)))
         {
             parameters.addValue(parameterName, courseModel.getCourseId());
         }
-        else if (insertColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENT_ID)))
+        else if (insertColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENTS_ID)))
         {
             parameters.addValue(parameterName, courseModel.getDepartmentId());
         }
@@ -93,7 +93,7 @@ public class CoursesDepartmentDaoImpl extends BaseDaoImpl<CourseDepartment> impl
         {
             courseModel.setId((Integer) keyMap.get(keyHolderColumnName));
         }
-        else if (keyHolderColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENT_ID)))
+        else if (keyHolderColumnName.equals(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENTS_ID)))
         {
             courseModel.setDepartmentId((Integer) keyMap.get(keyHolderColumnName));
         }

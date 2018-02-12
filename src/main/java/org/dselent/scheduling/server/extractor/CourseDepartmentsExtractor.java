@@ -25,8 +25,8 @@ public class CourseDepartmentsExtractor extends Extractor<List<CourseDepartment>
                 result.setId(null);
             }
 
-            result.setCourseId(rs.getInt(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_ID)));
-            result.setDepartmentId(rs.getInt(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENT_ID)));
+            result.setCourseId(rs.getInt(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSES_ID)));
+            result.setDepartmentId(rs.getInt(CourseDepartment.getColumnName(CourseDepartment.Columns.DEPARTMENTS_ID)));
             result.setCourseNumber(rs.getInt(CourseDepartment.getColumnName(CourseDepartment.Columns.COURSE_NUMBER)));
             result.setCreatedAt(rs.getTimestamp(CourseDepartment.getColumnName(CourseDepartment.Columns.CREATED_AT)));
             result.setUpdatedAt(rs.getTimestamp(CourseDepartment.getColumnName(CourseDepartment.Columns.UPDATED_AT)));
