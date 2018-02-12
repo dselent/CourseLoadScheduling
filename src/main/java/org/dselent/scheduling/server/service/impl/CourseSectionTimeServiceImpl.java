@@ -8,6 +8,7 @@ import org.dselent.scheduling.server.model.CourseTime;
 import org.dselent.scheduling.server.service.CourseSectionTimeService;
 import org.dselent.scheduling.server.sqlutils.QueryTerm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import static org.dselent.scheduling.server.sqlutils.ComparisonOperator.EQUAL;
 /**
  * Created by Nathan on 2/9/2018.
  */
+@Service
 public class CourseSectionTimeServiceImpl implements CourseSectionTimeService{
 
     @Autowired
