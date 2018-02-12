@@ -29,7 +29,7 @@ public class CourseTime extends Model {
     private static final Map<Columns, JDBCType> COLUMN_TYPE_MAP = new HashMap<>();
 
     static {
-        for (Columns key : COLUMN_LIST) {
+        for (Columns key : Columns.values()) {
 
             COLUMN_LIST.add(key);
         }
