@@ -3,8 +3,6 @@ package org.dselent.scheduling.server.model.custommodel;
 import org.dselent.scheduling.server.model.Model;
 
 import java.sql.JDBCType;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.*;
 
 /**

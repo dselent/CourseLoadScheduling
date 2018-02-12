@@ -13,7 +13,6 @@ import org.dselent.scheduling.server.requests.TermRemove;
 import org.dselent.scheduling.server.requests.TermModify;
 import org.dselent.scheduling.server.requests.TermAdd;
 import org.dselent.scheduling.server.service.TermService;
-import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
