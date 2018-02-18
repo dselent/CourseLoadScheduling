@@ -1,5 +1,6 @@
 package org.dselent.scheduling.server.controller.impl;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.dselent.scheduling.server.controller.UsersController;
 import org.dselent.scheduling.server.dto.RegisterUserDto;
 import org.dselent.scheduling.server.miscellaneous.JsonResponseCreator;
 import org.dselent.scheduling.server.requests.Register;
+import org.dselent.scheduling.server.returnobjects.ReturnUser;
 import org.dselent.scheduling.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,6 +61,36 @@ public class UsersControllerImpl implements UsersController
 		.build();
 		
 		userService.registerUser(registerUserDto);
+		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
+
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+    }
+	
+	public ResponseEntity<String> login(@RequestBody Map<String, String> request) throws Exception 
+    {
+    	// Print is for testing purposes
+		System.out.println("controller reached");
+    	
+		// add any objects that need to be returned to the success list
+		String response = "";
+		List<Object> success = new ArrayList<Object>();
+		
+		String userName = request.get("userName");
+		String password = request.get("password");
+
+		// fake a login
+		ReturnUser returnUser = new ReturnUser();
+		returnUser.setId(1);
+		returnUser.setUserName("Test User Name");
+		returnUser.setFirstName(userName);
+		returnUser.setLastName(password);
+		returnUser.setEmail("Test Email");
+		returnUser.setUserStateId(1);
+		returnUser.setCreatedAt(Instant.now().getEpochSecond());
+		returnUser.setUpdatedAt(Instant.now().getEpochSecond());
+		
+		success.add(returnUser);
+		
 		response = JsonResponseCreator.getJSONResponse(JsonResponseCreator.ResponseKey.SUCCESS, success);
 
 		return new ResponseEntity<String>(response, HttpStatus.OK);
